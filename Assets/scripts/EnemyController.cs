@@ -12,6 +12,8 @@ public class EnemyController : MonoBehaviour {
 
 	void FixedUpdate () {
 		MoveTowardsClosestSheep ();
+		Vector3 scale = SheepMath.GetLocalScale (this.gameObject, rigidbody.velocity.x + navAgent.velocity.x);
+		transform.localScale = scale;
 	}
 
 	void UtilizeSheep(GameObject sheep){
@@ -23,29 +25,10 @@ public class EnemyController : MonoBehaviour {
 	}
 
 	void MoveTowardsClosestSheep() {
-		GameObject sheep = FindClosestGameObjectWithTag ("Sheep");
+		GameObject sheep = SheepMath.FindClosestUnsafeSheep (this.gameObject);
 		if (sheep != null) {
 			navAgent.SetDestination (sheep.transform.position);
 		}
-	}
-
-	GameObject FindClosestGameObjectWithTag(string tag) {
-		GameObject[] objs = GameObject.FindGameObjectsWithTag (tag);
-		float distance = float.MaxValue;
-		GameObject closest = null;
-
-		foreach(GameObject obj in objs) {
-			if (obj.GetComponent<SheepController>().safe)
-				continue;
-			Vector3 v = this.transform.position - obj.transform.position;
-			float sqr = SheepMath.SqrMagnitude2D(v);
-			if (sqr < distance) {
-				closest = obj;
-				distance = sqr;
-			}
-		}
-		
-		return closest;
 	}
 
 	void OnCollisionEnter(Collision collision) {

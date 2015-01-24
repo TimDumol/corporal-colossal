@@ -8,8 +8,12 @@ public class HeroController : MonoBehaviour {
 	public GameObject carriedSheep;
 	// space was pressed before last fixedupdate
 	private bool spaceIsHeld = false;
-	private bool shouldPickupSheep = false;
-	private bool shouldDropSheep = false;
+	private Animator animator;
+
+	void Start ()
+	{
+		animator = transform.FindChild ("Player Renderer").GetComponent<Animator>();
+	}
 
 	// Update is called once per frame
 	void FixedUpdate ()
@@ -18,56 +22,39 @@ public class HeroController : MonoBehaviour {
 		float v = Input.GetAxis("Vertical");
 		Vector3 movement = new Vector3(h, 0.0f, v);
 		transform.position += movement * Time.deltaTime * moveSpeed;
-		if (h != 0 || v != 0) {
-			// transform.rotation = Quaternion.LookRotation(movement);
-		}
-		if (spaceIsHeld) {
-			Debug.Log ("yes, space is held");
-			if (carriedSheep) {
-				Debug.Log("trying to drop the fucker");
-				DropSheep();
-			} else {
-				PickUpClosestSheep();
-			}
-		}
-		spaceIsHeld = false;
-	}
+		transform.localScale = SheepMath.GetLocalScale(this.gameObject, h);
 
-	void Update()
-	{
+		if (Mathf.Abs(h) > 0 || Mathf.Abs(v) > 0) {
+			animator.SetBool ("Walking", true);
+		} else {
+			animator.SetBool ("Walking", false);
+		}
 		if (Input.GetButtonDown ("Jump")) {
-			spaceIsHeld = true;
-		}
-	}
-
-	GameObject FindClosestGameObjectWithTag(string tag)
-	{
-		GameObject[] objs = GameObject.FindGameObjectsWithTag (tag);
-		float distance = float.MaxValue;
-		GameObject closest = null;
-		
-		foreach(GameObject obj in objs) {
-			Vector3 v = this.transform.position - obj.transform.position;
-			float sqr = SheepMath.SqrMagnitude2D(v);
-			if (sqr < distance) {
-				closest = obj;
-				distance = sqr;
+			if (spaceIsHeld) {
+				// Do nothing because space was just being held down.
+			} else if (carriedSheep) {
+				Debug.Log ("trying to drop the fucker");
+				DropSheep ();
+			} else {
+				PickUpClosestSheep ();
 			}
+			spaceIsHeld = true;
+		} else {
+			spaceIsHeld = false;
 		}
-		
-		return closest;
 	}
 
 	GameObject PickUpClosestSheep()
 	{
 		if (this.carriedSheep == null)
 		{
-			GameObject sheep = FindClosestGameObjectWithTag ("Sheep");
+			GameObject sheep = SheepMath.FindClosestUnsafeSheep (this.gameObject);
 			Debug.Log (string.Format ("My closest sheep is here: {0}; I am here! {1}", sheep.transform.position, this.transform.position));
 			float distance = SheepMath.SqrMagnitude2D(this.transform.position - sheep.transform.position);
 			if (distance < maxSheepPickupDistance) {
 				sheep.SetActive (false);
 				carriedSheep = sheep;
+				animator.SetBool ("CarryingSheep", true);
 				return carriedSheep;
 			}
 		}
@@ -79,13 +66,14 @@ public class HeroController : MonoBehaviour {
 		if (carriedSheep != null)
 		{
 			Debug.Log ("Yes, carried");
-			GameObject entrance = FindClosestGameObjectWithTag("Pen Entrance");
+			GameObject entrance = SheepMath.FindClosestGameObjectWithTag(this.gameObject, "Pen Entrance");
 			float distance = SheepMath.SqrMagnitude2D(this.transform.position - entrance.transform.position);
 			Debug.Log ("distance " + distance + " " + maxEntranceDistance);
 			if (distance < maxEntranceDistance) {
 				GameObject tmp = carriedSheep;
 				carriedSheep = null;
 				StateController.AddSheepSaved(tmp);
+				animator.SetBool ("CarryingSheep", false);
 			} else {
 
 				Renderer renderer = GetComponentInChildren<Renderer>();
@@ -97,6 +85,7 @@ public class HeroController : MonoBehaviour {
 				carriedSheep.rigidbody.velocity = Vector3.zero;
 				carriedSheep.SetActive (true);
 				carriedSheep = null;
+				animator.SetBool ("CarryingSheep", false);
 			}
 		}
 	}

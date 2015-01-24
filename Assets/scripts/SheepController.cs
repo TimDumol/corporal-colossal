@@ -17,6 +17,12 @@ public class SheepController : MonoBehaviour
 		safe = false;
 	}
 
+	void FixedUpdate()
+	{
+		Vector3 scale = SheepMath.GetLocalScale (this.gameObject, rigidbody.velocity.x + navAgent.velocity.x);
+		transform.localScale = scale;
+	}
+
 	void Update ()
 	{
 		if (safe && navAgent.hasPath) {
