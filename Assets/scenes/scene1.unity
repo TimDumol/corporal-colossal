@@ -875,6 +875,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 11403664, guid: 6269c6ac6d457034393930e3dc5f38b4, type: 2}
+      propertyPath: enemySpawnTimer
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6269c6ac6d457034393930e3dc5f38b4, type: 2}
   m_RootGameObject: {fileID: 1864788925}
@@ -1760,6 +1764,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70ff0f116b0fec140b3667470256d299, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemySpawnTimer: 3
   sheep: {fileID: 169206, guid: c393e61ac58d97a47a294746c9155f01, type: 2}
   enemy: {fileID: 126006, guid: 9173a92d14c9c5140b005c22d1e402e4, type: 2}
   player: {fileID: 101300, guid: d6d170c33f80aa144be467b87ec3286c, type: 2}
