@@ -8,22 +8,35 @@ public class EnemyController : MonoBehaviour {
 	void Start () {
 		navAgent = this.GetComponent<NavMeshAgent>();
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
-		GameObject[] sheeps = GameObject.FindGameObjectsWithTag ("Sheep");
-		float distance = float.MaxValue;
-		GameObject closestSheep = null;
+		MoveTowardsClosestSheep ();
+	}
 
-		foreach(GameObject sheep in sheeps) {
-			Vector3 v = this.transform.position - sheep.transform.position;
+	void UtilizeSheep(GameObject sheep){
+		Destroy (sheep);
+	}
+
+	void MoveTowardsClosestSheep() {
+		GameObject sheep = FindClosestGameObjectWithTag ("Sheep");
+		navAgent.SetDestination (sheep.transform.position);
+	}
+
+	GameObject FindClosestGameObjectWithTag(string tag) {
+		GameObject[] objs = GameObject.FindGameObjectsWithTag (tag);
+		float distance = float.MaxValue;
+		GameObject closest = null;
+
+		foreach(GameObject obj in objs) {
+			Vector3 v = this.transform.position - obj.transform.position;
 			if (v.sqrMagnitude < distance) {
-				closestSheep = sheep;
+				closest = obj;
 				distance = v.sqrMagnitude;
 			}
 		}
-
-		navAgent.SetDestination (closestSheep.transform.position);
-		//Debug.Log (closestSheep);
+		
+		return closest;
 	}
+
 }
