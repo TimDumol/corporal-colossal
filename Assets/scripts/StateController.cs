@@ -7,6 +7,9 @@ public class StateController : MonoBehaviour {
 	public static event GameStartAction OnLevelStart;
 	public delegate void LifeChangeAction (int lives);
 	public static event LifeChangeAction OnLifeChange;
+	public delegate void ScoreChangeAction ();
+	public static event ScoreChangeAction OnScoreChange;
+
 	private static int _lives;
 	public static int lives {
 		get {
@@ -14,10 +17,24 @@ public class StateController : MonoBehaviour {
 		}
 	}
 
-	public static void addSheepEaten() {
-		_lives -= 1;
-		OnLifeChange (lives);
+	private static int _score;
+	public static int score {
+		get {
+			return _score;
+		}
 	}
+
+	public static void addSheepEaten() {
+				_lives -= 1;
+				OnLifeChange (lives);
+	}
+
+	public static void AddSheepSaved(GameObject sheep) {
+		_score += 1;
+		sheep.GetComponent<SheepController>().safe = true;
+		OnScoreChange ();
+	}
+	
 
 	void Awake () {
 		Random.seed = System.Environment.TickCount; 
@@ -25,7 +42,9 @@ public class StateController : MonoBehaviour {
 
 	void ResetLives() {
 		_lives = GameProperties.initialLives;
-		OnLifeChange (lives);
+		if (OnLifeChange != null) {
+				OnLifeChange (lives);
+		}
 	}
 
 	// Use this for initialization

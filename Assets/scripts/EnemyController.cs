@@ -15,8 +15,13 @@ public class EnemyController : MonoBehaviour {
 	}
 
 	void UtilizeSheep(GameObject sheep){
-		 Destroy (sheep);
-		StateController.addSheepEaten ();
+			Destroy (sheep);
+			StateController.addSheepEaten ();
+	}
+
+	void KillPlayer(GameObject player) {
+		Debug.Log ("Player should be killed!");
+		// Destroy (player);
 	}
 
 	void MoveTowardsClosestSheep() {
@@ -32,6 +37,8 @@ public class EnemyController : MonoBehaviour {
 		GameObject closest = null;
 
 		foreach(GameObject obj in objs) {
+			if (obj.GetComponent<SheepController>().safe)
+				continue;
 			Vector3 v = this.transform.position - obj.transform.position;
 			if (v.sqrMagnitude < distance) {
 				closest = obj;
@@ -47,6 +54,8 @@ public class EnemyController : MonoBehaviour {
 		Collider other = collision.collider;
 		if (other.gameObject.tag == "Sheep") {
 			UtilizeSheep (other.gameObject);
+		} else if (other.gameObject.tag == "Player") {
+			KillPlayer (other.gameObject);
 		}
 	}
 }

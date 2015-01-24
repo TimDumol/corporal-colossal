@@ -8,9 +8,12 @@ public class SheepController : MonoBehaviour
 	public float moveDistance = 1;
 	public float minDistFromBorder = 10;
 
+	public bool safe; 
+
 	void Start ()
 	{
 		navAgent = this.GetComponent<NavMeshAgent>();
+		safe = false;
 	}
 
 	void Update ()

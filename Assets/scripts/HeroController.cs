@@ -3,6 +3,7 @@ using System.Collections;
 
 public class HeroController : MonoBehaviour {
 	public float maxSheepPickupDistance;
+	public float maxEntranceDistance;
 	public float moveSpeed;
 	public GameObject carriedSheep;
 	private bool spaceIsHeld = false;
@@ -80,9 +81,18 @@ public class HeroController : MonoBehaviour {
 	{
 		if (carriedSheep != null)
 		{
-			carriedSheep.transform.position = transform.position;
-			carriedSheep.SetActive (true);
-			carriedSheep = null;
+			GameObject entrance = FindClosestGameObjectWithTag("Pen Entrance");
+			float distance = (this.transform.position - entrance.transform.position).sqrMagnitude;
+			if (distance < maxEntranceDistance) {
+				StateController.AddSheepSaved(carriedSheep);
+				carriedSheep.transform.position = Vector3.zero;
+				carriedSheep.SetActive (true);
+				carriedSheep = null;
+			} else {
+				carriedSheep.transform.position = transform.position;
+				carriedSheep.SetActive (true);
+				carriedSheep = null;
+			}
 		}
 	}
 }
