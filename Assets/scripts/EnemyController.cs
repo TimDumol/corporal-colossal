@@ -50,7 +50,7 @@ public class EnemyController : MonoBehaviour {
 	void OnCollisionEnter(Collision collision) {
 		Debug.Log ("You and I collide~");
 		Collider other = collision.collider;
-		if (other.gameObject.tag == "Sheep") {
+		if (other.gameObject.tag == "Sheep" && !other.gameObject.GetComponent<SheepController>().safe) {
 			UtilizeSheep (other.gameObject);
 		} else if (other.gameObject.tag == "Player") {
 			KillPlayer (other.gameObject);
