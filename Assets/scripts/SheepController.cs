@@ -5,7 +5,8 @@ public class SheepController : MonoBehaviour
 {
 	private NavMeshAgent navAgent;
 
-	public float moveSpeed = 5;
+	public float moveDistance = 1;
+	public float minDistFromBorder = 10;
 
 	void Start ()
 	{
@@ -14,10 +15,17 @@ public class SheepController : MonoBehaviour
 
 	void Update ()
 	{
-		float dx = Random.Range (-10.0f, 10.0f) * moveSpeed;
-		float dz = Random.Range (-10.0f, 10.0f) * moveSpeed;
+		if (navAgent.remainingDistance < 1) {
+			float newX = transform.position.x + Random.Range(-10.0f, 10.0f) * moveDistance;
+			newX = Mathf.Min(newX, GameProperties.right - minDistFromBorder);
+			newX = Mathf.Max(newX, GameProperties.left + minDistFromBorder);
 
-		Vector3 targetPosition = transform.position + new Vector3(dx, 0, dz);
-		navAgent.SetDestination(targetPosition);
+			float newZ = transform.position.z + Random.Range(-10.0f, 10.0f) * moveDistance;
+			newZ = Mathf.Min(newZ, GameProperties.top - minDistFromBorder);
+			newZ = Mathf.Max(newZ, GameProperties.bottom + minDistFromBorder);
+
+			navAgent.SetDestination(new Vector3(newX, 0, newZ));
+
+		}
 	}
 }
