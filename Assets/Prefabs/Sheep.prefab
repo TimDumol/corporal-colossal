@@ -29,7 +29,6 @@ GameObject:
   - 114: {fileID: 11469208}
   - 65: {fileID: 6569206}
   - 195: {fileID: 19569206}
-  - 95: {fileID: 9569206}
   m_Layer: 0
   m_Name: Sheep
   m_TagString: Sheep
@@ -104,21 +103,6 @@ Animator:
   m_ApplyRootMotion: 1
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!95 &9569206
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 169206}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 552d1dd0f18ef4f4f8377c25d25cb632, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 1
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &11469208
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -148,11 +132,11 @@ NavMeshAgent:
   m_AngularSpeed: 180
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
+  m_AutoBraking: 0
   m_AutoRepath: 1
   m_Height: 4
   m_BaseOffset: 2
-  m_WalkableMask: 4294967295
+  m_WalkableMask: 5
   m_ObstacleAvoidanceType: 4
 --- !u!212 &21269106
 SpriteRenderer:

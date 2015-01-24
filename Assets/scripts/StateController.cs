@@ -30,12 +30,11 @@ public class StateController : MonoBehaviour {
 	}
 
 	public static void addSheepEaten(GameObject sheep) {
-		Destroy (sheep);
 		if (_lives > 0) {
 			_lives -= 1;
 		}
 		OnLifeChange (lives);
-		sheep.GetComponent<SheepController>().safe = true;
+
 		StateController.CheckLevelOver ();
 	}
 
@@ -46,7 +45,6 @@ public class StateController : MonoBehaviour {
 
 	public static void AddSheepSaved(GameObject sheep) {
 		_score += 1;
-		Debug.Log ("Sheep saved");
 		SheepFencerController.FenceSheep (sheep);
 		StateController.OnSheepSaved (sheep);
 		OnScoreChange(_score);
@@ -84,9 +82,6 @@ public class StateController : MonoBehaviour {
 			}
 		}
 		player = GameObject.FindGameObjectWithTag ("Player");
-		Debug.Log (string.Format ("Found this guy: {0}", player));
-		Debug.Log (string.Format ("The player is {0}", player));
-		Debug.Log (string.Format ("its controller is {0}", player.GetComponent<HeroController> ()));
 		if (player.GetComponent<HeroController> ().carriedSheep) {
 			unsafeSheep += 1;
 		}
