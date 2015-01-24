@@ -9,3 +9,7 @@ EditorBuildSettings:
     path: Assets/scenes/TitleScreen.unity
   - enabled: 1
     path: Assets/scenes/scene1.unity
+  - enabled: 1
+    path: Assets/scenes/InstructionsScene.unity
+  - enabled: 1
+    path: Assets/scenes/HighscoreScene.unity

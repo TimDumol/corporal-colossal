@@ -2,9 +2,11 @@
 using System.Collections;
 
 public class StateController : MonoBehaviour {
-	
-	public delegate void GameStartAction();
-	public static event GameStartAction OnLevelStart;
+
+	public delegate void PreLevelStartAction();
+	public static event PreLevelStartAction PreLevelStart;
+	public delegate void LevelStartAction();
+	public static event LevelStartAction OnLevelStart;
 	public delegate void LifeChangeAction (int lives);
 	public static event LifeChangeAction OnLifeChange;
 	public delegate void ScoreChangeAction (int score);
@@ -33,31 +35,30 @@ public class StateController : MonoBehaviour {
 
 	public static void AddSheepSaved(GameObject sheep) {
 		_score += 1;
-		if (OnScoreChange != null) {
-			OnScoreChange(_score);
-		};
-		if (OnSheepSave != null) {
-			OnSheepSave(sheep);
-		}
+		OnScoreChange(_score);
+		OnSheepSave(sheep);
 	}
 
 	void Awake () {
-		Random.seed = System.Environment.TickCount; 
+		Random.seed = System.Environment.TickCount;
+
+		PreLevelStart += () => {};
+		OnLevelStart += () => {};
+		OnLifeChange += (int lives) => {};
+		OnScoreChange += (int score) => {};
+		OnSheepSave += (GameObject sheep) => {};
 	}
 
 	void ResetLives() {
 		_lives = GameProperties.initialLives;
-		if (OnLifeChange != null) {
-				OnLifeChange (lives);
-		}
+		OnLifeChange (lives);
 	}
 
 	// Use this for initialization
 	void Start () {
+		PreLevelStart ();
 		ResetLives ();
-		if (OnLevelStart != null) {
-				OnLevelStart ();
-		}
+		OnLevelStart ();
     }
     
     void OnLevelWasLoaded(int levelId) {
