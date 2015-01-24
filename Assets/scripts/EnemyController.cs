@@ -7,6 +7,7 @@ public class EnemyController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		navAgent = this.GetComponent<NavMeshAgent>();
+		navAgent.updateRotation = false;
 	}
 
 	// Update is called once per frame
@@ -38,9 +39,10 @@ public class EnemyController : MonoBehaviour {
 			if (obj.GetComponent<SheepController>().safe)
 				continue;
 			Vector3 v = this.transform.position - obj.transform.position;
-			if (v.sqrMagnitude < distance) {
+			float sqr = SheepMath.SqrMagnitude2D(v);
+			if (sqr < distance) {
 				closest = obj;
-				distance = v.sqrMagnitude;
+				distance = sqr;
 			}
 		}
 		
@@ -48,7 +50,6 @@ public class EnemyController : MonoBehaviour {
 	}
 
 	void OnCollisionEnter(Collision collision) {
-		Debug.Log ("You and I collide~");
 		Collider other = collision.collider;
 		if (other.gameObject.tag == "Sheep" && !other.gameObject.GetComponent<SheepController>().safe) {
 			UtilizeSheep (other.gameObject);

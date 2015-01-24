@@ -5,6 +5,7 @@ public class PopulatorController : MonoBehaviour
 {
 	public GameObject sheep;
 	public GameObject enemy;
+	public GameObject player;
 	private Vector3 sheepSize;
 	private Vector3 enemySize;
 
@@ -59,8 +60,13 @@ public class PopulatorController : MonoBehaviour
         } while (!spawned);
 	}
 
+	void SpawnPlayer() {
+		Instantiate (player, new Vector3 (10, player.transform.localScale.y/2, 0), Quaternion.identity);
+	}
+
 	void OnLevelStart (int level)
 	{
+		SpawnPlayer ();
 		for (int i = 0; i < 2 + level; ++i) {
 			SpawnSheep (level);
 		}

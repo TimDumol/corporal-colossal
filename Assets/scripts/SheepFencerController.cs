@@ -4,7 +4,6 @@ using System.Collections;
 public class SheepFencerController : MonoBehaviour {
 
 	void Awake () {
-		StateController.OnSheepSave += FenceSheep;
 	}
 
 	// Use this for initialization
