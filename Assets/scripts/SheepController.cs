@@ -13,6 +13,7 @@ public class SheepController : MonoBehaviour
 	void Start ()
 	{
 		navAgent = this.GetComponent<NavMeshAgent>();
+		navAgent.updateRotation = false;
 		safe = false;
 	}
 
