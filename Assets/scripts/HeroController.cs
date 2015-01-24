@@ -29,17 +29,20 @@ public class HeroController : MonoBehaviour {
 		} else {
 			animator.SetBool ("Walking", false);
 		}
-		if (Input.GetButtonDown ("Jump")) {
-			if (spaceIsHeld) {
-				// Do nothing because space was just being held down.
-			} else if (carriedSheep) {
+		if (spaceIsHeld) {
+			// Do nothing because space was just being held down.
+			if (carriedSheep) {
 				DropSheep ();
 			} else {
 				PickUpClosestSheep ();
 			}
+        }
+		spaceIsHeld = false;
+	}
+
+	void Update() {
+		if (Input.GetButtonDown ("Jump")) {
 			spaceIsHeld = true;
-		} else {
-			spaceIsHeld = false;
 		}
 	}
 

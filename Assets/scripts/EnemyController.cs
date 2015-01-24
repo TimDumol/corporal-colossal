@@ -37,8 +37,6 @@ public class EnemyController : MonoBehaviour {
 			Debug.Log (this);
 			Debug.Log ("sheep collision la");
 			UtilizeSheep (other.gameObject);
-		} else if (other.gameObject.tag == "Player") {
-			KillPlayer (other.gameObject);
 		}
 	}
 }
