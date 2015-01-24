@@ -29,8 +29,10 @@ public class StateController : MonoBehaviour {
 	}
 
 	public static void addSheepEaten() {
-				_lives -= 1;
-				OnLifeChange (lives);
+		if (_lives > 0) {
+			_lives -= 1;
+		}
+		OnLifeChange (lives);
 	}
 
 	public static void AddSheepSaved(GameObject sheep) {
