@@ -15,7 +15,7 @@ public class EnemyController : MonoBehaviour {
 	}
 
 	void UtilizeSheep(GameObject sheep){
-		Destroy (sheep);
+		// Destroy (sheep);
 	}
 
 	void MoveTowardsClosestSheep() {
@@ -42,6 +42,7 @@ public class EnemyController : MonoBehaviour {
 	}
 
 	void OnCollisionEnter(Collision collision) {
+		Debug.Log ("You and I collide~");
 		Collider other = collision.collider;
 		if (other.gameObject.tag == "Sheep") {
 			UtilizeSheep (other.gameObject);
