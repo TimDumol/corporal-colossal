@@ -15,7 +15,7 @@ public class EnemyController : MonoBehaviour {
 	}
 
 	void UtilizeSheep(GameObject sheep){
-		// Destroy (sheep);
+		 Destroy (sheep);
 	}
 
 	void MoveTowardsClosestSheep() {
