@@ -24,6 +24,6 @@ public class EnemyController : MonoBehaviour {
 		}
 
 		navAgent.SetDestination (closestSheep.transform.position);
-		Debug.Log (closestSheep);
+		//Debug.Log (closestSheep);
 	}
 }
