@@ -13,7 +13,7 @@ using System.Collections;
 
 public class GameProperties
 {
-	public static int top = 50;
+	public static int top = 16;
 	public static int bottom = -50;
 	public static int left = -50;
 	public static int right = 50;

@@ -70,7 +70,7 @@ public class PopulatorController : MonoBehaviour
 	}
 
 	void SpawnPlayer() {
-		Instantiate (player, new Vector3 (10, playerSize.y/2, 0), Quaternion.identity);
+		Instantiate (player, new Vector3 (30, playerSize.y/2, 0), Quaternion.identity);
 	}
 
 	void OnLevelStart (int level)
