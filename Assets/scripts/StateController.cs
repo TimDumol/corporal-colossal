@@ -13,8 +13,6 @@ public class StateController : MonoBehaviour {
 	public static event LifeChangeAction OnLifeChange;
 	public delegate void ScoreChangeAction (int score);
 	public static event ScoreChangeAction OnScoreChange;
-	public delegate void SheepSaveAction (GameObject sheep);
-	public static event SheepSaveAction OnSheepSave;
 
 	public static int level;
 	private static int _lives;
@@ -49,8 +47,9 @@ public class StateController : MonoBehaviour {
 	public static void AddSheepSaved(GameObject sheep) {
 		_score += 1;
 		Debug.Log ("Sheep saved");
+		SheepFencerController.FenceSheep (sheep);
+		StateController.OnSheepSaved (sheep);
 		OnScoreChange(_score);
-		OnSheepSave(sheep);
 	}
 
 	void Awake () {
@@ -60,8 +59,6 @@ public class StateController : MonoBehaviour {
 		OnLevelStart += (int level) => {};
 		OnLifeChange += (int lives) => {};
 		OnScoreChange += (int score) => {};
-		OnSheepSave += (GameObject sheep) => {};
-		StateController.OnSheepSave += this.OnSheepSaved;
 	}
 
 	public static void ResetLives() {
@@ -115,6 +112,7 @@ public class StateController : MonoBehaviour {
 	}
 
 	static void ClearLevel() {
+		DestroyAllGameObjectsWithTag ("Player");
 		DestroyAllGameObjectsWithTag ("Sheep");
 		DestroyAllGameObjectsWithTag ("Enemy");
 	}
