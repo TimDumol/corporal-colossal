@@ -7,6 +7,7 @@ public class EnemyController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		navAgent = this.GetComponent<NavMeshAgent>();
+		navAgent.updateRotation = false;
 	}
 
 	// Update is called once per frame
@@ -49,7 +50,6 @@ public class EnemyController : MonoBehaviour {
 	}
 
 	void OnCollisionEnter(Collision collision) {
-		Debug.Log ("You and I collide~");
 		Collider other = collision.collider;
 		if (other.gameObject.tag == "Sheep") {
 			UtilizeSheep (other.gameObject);

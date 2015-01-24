@@ -19,7 +19,7 @@ public class HeroController : MonoBehaviour {
 		Vector3 movement = new Vector3(h, 0.0f, v);
 		transform.position += movement * Time.deltaTime * moveSpeed;
 		if (h != 0 || v != 0) {
-			transform.rotation = Quaternion.LookRotation(movement);
+			// transform.rotation = Quaternion.LookRotation(movement);
 		}
 		if (spaceIsHeld) {
 			if (carriedSheep) {
