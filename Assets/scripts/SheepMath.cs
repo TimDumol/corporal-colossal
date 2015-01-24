@@ -15,14 +15,15 @@ public class SheepMath : MonoBehaviour {
 		foreach(GameObject obj in objs) {
 			if (obj.GetComponent<SheepController>().safe)
 				continue;
-			Vector3 v = finder.transform.position - obj.transform.position;
-			float sqr = SheepMath.SqrMagnitude2D(v);
-			if (sqr < distance) {
+			float dist = SheepMath.DistanceBetween2DGameObjects(finder, obj);
+			if (dist < distance) {
 				closest = obj;
-				distance = sqr;
+				distance = dist;
 			}
 		}
-		
+		Vector3 ds = finder.transform.position - closest.transform.position;
+		Debug.Log ("Sqrt original: "+Mathf.Sqrt (SheepMath.SqrMagnitude2D(ds)));
+		Debug.Log ("Closest sheep: " + distance);
 		return closest;
 	}
 
@@ -34,11 +35,10 @@ public class SheepMath : MonoBehaviour {
 		GameObject closest = null;
 		
 		foreach(GameObject obj in objs) {
-			Vector3 v = finder.transform.position - obj.transform.position;
-			float sqr = SheepMath.SqrMagnitude2D(v);
-			if (sqr < distance) {
+			float dist = SheepMath.DistanceBetween2DGameObjects(finder, obj);
+			if (dist < distance) {
 				closest = obj;
-				distance = sqr;
+				distance = dist;
 			}
 		}
 		
@@ -54,5 +54,34 @@ public class SheepMath : MonoBehaviour {
 		} else {
 			return obj.transform.localScale;
 		}
+	}
+
+	public static float DistanceBetween2DGameObjects (GameObject aObj, GameObject bObj) {
+		Bounds a = aObj.collider.bounds;
+		Bounds b = bObj.collider.bounds;
+
+		if (a.Intersects (b)) {
+			return 0.0f;
+		}
+
+		Bounds left = a.min.x < b.min.x ? a : b;
+		Bounds right = a.min.x < b.min.x ? b : a;
+		float dx = 0;
+		if (left.max.x < right.min.x) {
+			dx = right.min.x - left.max.x;
+		} else {
+			dx = 0;
+		}
+
+		Bounds lower = a.min.z < b.min.z ? a : b;
+		Bounds upper = a.min.z < b.min.z ? b : a;
+		float dz = 0;
+		if (lower.max.z < upper.min.z) {
+			dz = upper.min.z - lower.max.z;
+		} else {
+			dz = 0;
+		}
+
+		return Mathf.Sqrt (dx * dx + dz * dz);
 	}
 }

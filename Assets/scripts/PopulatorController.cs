@@ -65,7 +65,7 @@ public class PopulatorController : MonoBehaviour
 			float x = (GameProperties.left+GameProperties.right)/2.0f;
 			if (canPut(enemySize, x, z)) {
 				GameObject e = (GameObject)Instantiate (enemy, new Vector3 (x, enemySize.y/2f, z), Quaternion.identity);
-				e.GetComponent<NavMeshAgent>().speed *= 1 + 0.20f*level;
+				e.GetComponent<NavMeshAgent>().speed *= 1 + 0.10f*level;
 				spawned = true;
 			}
         } while (!spawned);

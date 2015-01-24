@@ -33,7 +33,6 @@ public class HeroController : MonoBehaviour {
 			if (spaceIsHeld) {
 				// Do nothing because space was just being held down.
 			} else if (carriedSheep) {
-				Debug.Log ("trying to drop the fucker");
 				DropSheep ();
 			} else {
 				PickUpClosestSheep ();
@@ -49,7 +48,7 @@ public class HeroController : MonoBehaviour {
 		if (this.carriedSheep == null)
 		{
 			GameObject sheep = SheepMath.FindClosestUnsafeSheep (this.gameObject);
-			float distance = SheepMath.SqrMagnitude2D(this.transform.position - sheep.transform.position);
+			float distance = SheepMath.DistanceBetween2DGameObjects(this.gameObject, sheep.gameObject);
 			if (distance < maxSheepPickupDistance) {
 				sheep.SetActive (false);
 				carriedSheep = sheep;
@@ -64,17 +63,14 @@ public class HeroController : MonoBehaviour {
 	{
 		if (carriedSheep != null)
 		{
-			Debug.Log ("Yes, carried");
 			GameObject entrance = SheepMath.FindClosestGameObjectWithTag(this.gameObject, "Pen Entrance");
-			float distance = SheepMath.SqrMagnitude2D(this.transform.position - entrance.transform.position);
-			Debug.Log ("distance " + distance + " " + maxEntranceDistance);
+			float distance = SheepMath.DistanceBetween2DGameObjects(this.gameObject, entrance.gameObject);
 			if (distance < maxEntranceDistance) {
 				GameObject tmp = carriedSheep;
 				carriedSheep = null;
 				StateController.AddSheepSaved(tmp);
 				animator.SetBool ("CarryingSheep", false);
 			} else {
-
 				Renderer renderer = GetComponentInChildren<Renderer>();
 				Vector3 dPos = new Vector3(
 					renderer.bounds.extents.x * Mathf.Sign(transform.position.x),
