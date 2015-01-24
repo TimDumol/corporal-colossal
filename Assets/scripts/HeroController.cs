@@ -83,6 +83,7 @@ public class HeroController : MonoBehaviour {
 		{
 			GameObject entrance = FindClosestGameObjectWithTag("Pen Entrance");
 			float distance = (this.transform.position - entrance.transform.position).sqrMagnitude;
+			Debug.Log ("distance " + distance + " " + maxEntranceDistance);
 			if (distance < maxEntranceDistance) {
 				StateController.AddSheepSaved(carriedSheep);
 				carriedSheep = null;

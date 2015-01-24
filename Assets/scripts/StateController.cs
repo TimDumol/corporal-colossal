@@ -35,6 +35,7 @@ public class StateController : MonoBehaviour {
 
 	public static void AddSheepSaved(GameObject sheep) {
 		_score += 1;
+		Debug.Log ("Sheep saved");
 		OnScoreChange(_score);
 		OnSheepSave(sheep);
 	}
