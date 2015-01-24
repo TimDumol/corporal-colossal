@@ -5,7 +5,7 @@ public class StateController : MonoBehaviour {
 
 	public delegate void PreLevelStartAction();
 	public static event PreLevelStartAction PreLevelStart;
-	public delegate void LevelStartAction();
+	public delegate void LevelStartAction(int level);
 	public static event LevelStartAction OnLevelStart;
 	public delegate void LifeChangeAction (int lives);
 	public static event LifeChangeAction OnLifeChange;
@@ -14,6 +14,7 @@ public class StateController : MonoBehaviour {
 	public delegate void SheepSaveAction (GameObject sheep);
 	public static event SheepSaveAction OnSheepSave;
 
+	public static int level;
 	private static int _lives;
 	public static int lives {
 		get {
@@ -28,10 +29,18 @@ public class StateController : MonoBehaviour {
 		}
 	}
 
-	public static void addSheepEaten() {
+	public static void addSheepEaten(GameObject sheep) {
+		Destroy (sheep);
 		if (_lives > 0) {
 			_lives -= 1;
 		}
+		OnLifeChange (lives);
+		sheep.GetComponent<SheepController>().safe = true;
+		StateController.CheckLevelOver ();
+	}
+
+	public static void addPlayerDeath(GameObject player) {
+		_lives -= 1;
 		OnLifeChange (lives);
 	}
 
@@ -46,25 +55,73 @@ public class StateController : MonoBehaviour {
 		Random.seed = System.Environment.TickCount;
 
 		PreLevelStart += () => {};
-		OnLevelStart += () => {};
+		OnLevelStart += (int level) => {};
 		OnLifeChange += (int lives) => {};
 		OnScoreChange += (int score) => {};
 		OnSheepSave += (GameObject sheep) => {};
+		StateController.OnSheepSave += this.OnSheepSaved;
 	}
 
-	void ResetLives() {
+	public static void ResetLives() {
 		_lives = GameProperties.initialLives;
 		OnLifeChange (lives);
 	}
 
 	// Use this for initialization
 	void Start () {
+		StateController.level = 1;
 		PreLevelStart ();
 		ResetLives ();
-		OnLevelStart ();
+		OnLevelStart (StateController.level);
     }
-    
-    void OnLevelWasLoaded(int levelId) {
+
+	public static int CountUnsafeSheep () {
+		int unsafeSheep = 0;
+		GameObject[] sheeps = GameObject.FindGameObjectsWithTag ("Sheep");
+		foreach (GameObject s in sheeps) {
+			if (!s.GetComponent<SheepController>().safe) {
+				unsafeSheep += 1;
+			}
+		}
+		return unsafeSheep;
+	}
+
+	static void CheckLevelOver() {
+		int unsafeSheep = StateController.CountUnsafeSheep ();
+		if (unsafeSheep == 0) {
+			ClearLevel();
+			StateController.level += 1;
+			if (StateController.OnLevelStart != null) {
+				StateController.OnLevelStart(StateController.level);
+			}
+		}
+	}
+
+	static void OnSheepSaved(GameObject sheep) {
+		StateController.CheckLevelOver ();
+	}
+
+	static void DestroyAllGameObjectsWithTag(string tag) {
+		GameObject[] objs = GameObject.FindGameObjectsWithTag (tag);
+		foreach (GameObject o in objs) {
+			Destroy (o);
+		}
+	}
+
+	static void ClearLevel() {
+		DestroyAllGameObjectsWithTag ("Sheep");
+		DestroyAllGameObjectsWithTag ("Enemy");
+	}
+
+	void OnLifeChanged (int lives) {
+		if (lives <= 0) {
+			StateController.ClearLevel();
+			Debug.Log ("Game Over!");
+			// TODO: Go to game over screen.
+		}
+	}
+
+	void OnLevelWasLoaded(int levelId) {
 
 	}
 	

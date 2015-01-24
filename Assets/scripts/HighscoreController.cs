@@ -11,13 +11,4 @@ public class HighscoreController : MonoBehaviour {
 			highscoreDict[splitted[0]] = int.Parse(splitted[1]);
 		}
 	}
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
 }
