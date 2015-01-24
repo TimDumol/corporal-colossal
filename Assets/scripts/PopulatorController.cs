@@ -21,7 +21,7 @@ public class PopulatorController : MonoBehaviour
 		//Debug.Log (string.Format ("my size is : {0}; {1}", sheepSize, sheep.collider.bounds));
 	}
 
-	void SpawnSheep ()
+	void SpawnSheep (int level)
 	{
 		bool spawned = false;
 		do {
@@ -37,7 +37,7 @@ public class PopulatorController : MonoBehaviour
 		} while (!spawned);
 	}
 
-	void SpawnEnemy ()
+	void SpawnEnemy (int level)
 	{
 		bool spawned = false;
 		do {
@@ -46,19 +46,20 @@ public class PopulatorController : MonoBehaviour
 			Debug.Log (string.Format ("Generated: {0}, {1}; enemy size is: {2} ", x, z, enemySize));
 			if (!Physics.CheckCapsule (new Vector3(x - enemySize.x/2f, z/2f + 0.5f, z), new Vector3(x + enemySize.x/2f, z/2f + 0.5f, z), z/2f)) {
 				Debug.Log (string.Format ("Pass: {0}, {1}; enemy size is: {2} ", x, z, enemySize));
-				Instantiate (enemy, new Vector3 (x, 0.5f, z), Quaternion.identity);
+				GameObject e = (GameObject)Instantiate (enemy, new Vector3 (x, 0.5f, z), Quaternion.identity);
+				e.GetComponent<NavMeshAgent>().speed *= 1 + 0.20f*level;
                 spawned = true;
             }
             
         } while (!spawned);
 	}
 
-	void OnLevelStart ()
+	void OnLevelStart (int level)
 	{
-		for (int i = 0; i < 10; ++i) {
-			SpawnSheep ();
+		for (int i = 0; i < 2 + level; ++i) {
+			SpawnSheep (level);
 		}
-		SpawnEnemy ();
+		SpawnEnemy (level);
 	}
 
 	// Update is called once per frame

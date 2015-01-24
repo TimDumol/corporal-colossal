@@ -15,13 +15,11 @@ public class EnemyController : MonoBehaviour {
 	}
 
 	void UtilizeSheep(GameObject sheep){
-			Destroy (sheep);
-			StateController.addSheepEaten ();
+		StateController.addSheepEaten (sheep);
 	}
 
 	void KillPlayer(GameObject player) {
-		Debug.Log ("Player should be killed!");
-		// Destroy (player);
+		StateController.addPlayerDeath (player);
 	}
 
 	void MoveTowardsClosestSheep() {
