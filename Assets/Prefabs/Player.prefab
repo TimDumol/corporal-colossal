@@ -85,8 +85,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4e0c1d5847a748229b59501cde2cf20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSheepPickupDistance: 4
-  maxEntranceDistance: 4
+  maxSheepPickupDistance: 6
+  maxEntranceDistance: 6
   moveSpeed: 10
   carriedSheep: {fileID: 0}
 --- !u!136 &13692792

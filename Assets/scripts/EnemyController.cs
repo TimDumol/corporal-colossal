@@ -38,9 +38,10 @@ public class EnemyController : MonoBehaviour {
 			if (obj.GetComponent<SheepController>().safe)
 				continue;
 			Vector3 v = this.transform.position - obj.transform.position;
-			if (v.sqrMagnitude < distance) {
+			float sqr = SheepMath.SqrMagnitude2D(v);
+			if (sqr < distance) {
 				closest = obj;
-				distance = v.sqrMagnitude;
+				distance = sqr;
 			}
 		}
 		
