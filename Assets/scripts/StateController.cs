@@ -6,6 +6,10 @@ public class StateController : MonoBehaviour {
 	public delegate void GameStartAction();
 	public static event GameStartAction OnGameStart;
 
+	void Awake () {
+		Random.seed = System.Environment.TickCount; 
+	}
+
 	// Use this for initialization
 	void Start () {
 		if (OnGameStart != null) {

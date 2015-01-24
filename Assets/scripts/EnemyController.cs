@@ -15,12 +15,14 @@ public class EnemyController : MonoBehaviour {
 	}
 
 	void UtilizeSheep(GameObject sheep){
-		Destroy (sheep);
+		// Destroy (sheep);
 	}
 
 	void MoveTowardsClosestSheep() {
 		GameObject sheep = FindClosestGameObjectWithTag ("Sheep");
-		navAgent.SetDestination (sheep.transform.position);
+		if (sheep != null) {
+			navAgent.SetDestination (sheep.transform.position);
+		}
 	}
 
 	GameObject FindClosestGameObjectWithTag(string tag) {
@@ -39,4 +41,11 @@ public class EnemyController : MonoBehaviour {
 		return closest;
 	}
 
+	void OnCollisionEnter(Collision collision) {
+		Debug.Log ("You and I collide~");
+		Collider other = collision.collider;
+		if (other.gameObject.tag == "Sheep") {
+			UtilizeSheep (other.gameObject);
+		}
+	}
 }
