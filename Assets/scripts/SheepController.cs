@@ -18,7 +18,7 @@ public class SheepController : MonoBehaviour
 
 	void Update ()
 	{
-		if (navAgent.remainingDistance < 1) {
+		if (!safe || navAgent.remainingDistance < 1) {
 			float newX = transform.position.x + Random.Range(-10.0f, 10.0f) * moveDistance;
 			newX = Mathf.Min(newX, GameProperties.right - minDistFromBorder);
 			newX = Mathf.Max(newX, GameProperties.left + minDistFromBorder);

@@ -15,12 +15,14 @@ public class StateController : MonoBehaviour {
 
 	public static void AddSheepSaved(GameObject sheep) {
 		_score += 1;
-		sheep.GetComponent<SheepController>().safe = true;
 		OnSheepSaved(sheep);
 	}
 
 	public static void OnSheepSaved(GameObject sheep) {
 		Debug.Log ("Sheep saved");
+		sheep.GetComponent<SheepController>().safe = true;
+		sheep.transform.position = new Vector3(0, 10, 0);
+		sheep.SetActive(true);
 	}
 
 	void Awake () {

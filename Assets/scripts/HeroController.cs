@@ -17,7 +17,9 @@ public class HeroController : MonoBehaviour {
 		float v = Input.GetAxis("Vertical");
 		Vector3 movement = new Vector3(h, 0.0f, v);
 		transform.position += movement * Time.deltaTime * moveSpeed;
-		transform.rotation = Quaternion.LookRotation(movement);
+		if (movement != Vector3.zero) {
+			transform.rotation = Quaternion.LookRotation(movement);
+		}
 		if (shouldPickupSheep) {
 			PickUpClosestSheep ();
 			shouldPickupSheep = false;
@@ -83,8 +85,6 @@ public class HeroController : MonoBehaviour {
 			float distance = (this.transform.position - entrance.transform.position).sqrMagnitude;
 			if (distance < maxEntranceDistance) {
 				StateController.AddSheepSaved(carriedSheep);
-				carriedSheep.transform.position = Vector3.zero;
-				carriedSheep.SetActive (true);
 				carriedSheep = null;
 			} else {
 				carriedSheep.transform.position = transform.position;
