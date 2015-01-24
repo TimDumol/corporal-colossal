@@ -14,8 +14,13 @@ public class EnemyController : MonoBehaviour {
 		MoveTowardsClosestSheep ();
 	}
 
-	void UtilizeSheep(GameObject sheep){
-		 Destroy (sheep);
+	void UtilizeSheep(GameObject sheep) {
+		Destroy (sheep);
+	}
+
+	void KillPlayer(GameObject player) {
+		Debug.Log ("Player should be killed!");
+		// Destroy (player);
 	}
 
 	void MoveTowardsClosestSheep() {
@@ -46,6 +51,8 @@ public class EnemyController : MonoBehaviour {
 		Collider other = collision.collider;
 		if (other.gameObject.tag == "Sheep") {
 			UtilizeSheep (other.gameObject);
+		} else if (other.gameObject.tag == "Player") {
+			KillPlayer (other.gameObject);
 		}
 	}
 }
