@@ -12,8 +12,13 @@ public class PopulatorController : MonoBehaviour
 	void Awake ()
 	{
 		StateController.OnLevelStart += OnLevelStart;
-		sheepSize = sheep.transform.localScale;
-		enemySize = enemy.transform.localScale;
+		GameObject tmp = Instantiate (sheep, new Vector3 (-100, -100, -100), Quaternion.identity) as GameObject;
+		sheepSize = tmp.collider.bounds.size;
+		Destroy (tmp);
+		tmp = Instantiate (enemy, new Vector3 (-100, -100, -100), Quaternion.identity) as GameObject;
+		enemySize = tmp.collider.bounds.size;
+		Destroy (tmp);
+		Debug.Log (string.Format ("my sheep size is: {0}; {1}", sheepSize, enemySize));
 	}
 	// Use this for initialization
 	void Start ()
@@ -31,7 +36,7 @@ public class PopulatorController : MonoBehaviour
 			Debug.Log (string.Format ("Generated: {0}, {1}; sheep size is: {2} ", x, z, sheepSize));
 			if (!Physics.CheckCapsule (new Vector3(x - sheepSize.x/2f, z/2f + 0.5f, z), new Vector3(x + sheepSize.x/2f, z/2f + 0.5f, z), z/2f)) {
 				Debug.Log (string.Format ("Pass: {0}, {1}; sheep size is: {2} ", x, z, sheepSize));
-				Instantiate (sheep, new Vector3 (x, 0.5f, z), Quaternion.identity);
+				Instantiate (sheep, new Vector3 (x, 5f, z), Quaternion.Euler (90, 0, 0));
 				spawned = true;
 			}
 
@@ -47,7 +52,7 @@ public class PopulatorController : MonoBehaviour
 			Debug.Log (string.Format ("Generated: {0}, {1}; enemy size is: {2} ", x, z, enemySize));
 			if (!Physics.CheckCapsule (new Vector3(x - enemySize.x/2f, z/2f + 0.5f, z), new Vector3(x + enemySize.x/2f, z/2f + 0.5f, z), z/2f)) {
 				Debug.Log (string.Format ("Pass: {0}, {1}; enemy size is: {2} ", x, z, enemySize));
-				GameObject e = (GameObject)Instantiate (enemy, new Vector3 (x, 0.5f, z), Quaternion.identity);
+				GameObject e = (GameObject)Instantiate (enemy, new Vector3 (x, 5f, z), Quaternion.Euler (90, 0, 0));
 				e.GetComponent<NavMeshAgent>().speed *= 1 + 0.20f*level;
                 spawned = true;
             }
@@ -56,7 +61,7 @@ public class PopulatorController : MonoBehaviour
 	}
 
 	void SpawnPlayer() {
-		Instantiate (player, new Vector3 (10, player.transform.localScale.y/2, 0), Quaternion.identity);
+		Instantiate (player, new Vector3 (10, 0.05f, 0), Quaternion.Euler (90, 0, 0));
 	}
 
 	void OnLevelStart (int level)
