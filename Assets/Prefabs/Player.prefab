@@ -131,7 +131,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxSheepPickupDistance: 40
   maxEntranceDistance: 40
-  moveSpeed: 15
+  moveSpeed: 20
   carriedSheep: {fileID: 0}
 --- !u!212 &21235980
 SpriteRenderer:

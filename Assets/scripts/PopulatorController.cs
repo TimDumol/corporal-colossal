@@ -3,6 +3,7 @@ using System.Collections;
 
 public class PopulatorController : MonoBehaviour
 {
+	public float enemySpawnTimer;
 	public GameObject sheep;
 	public GameObject enemy;
 	public GameObject player;
@@ -55,12 +56,13 @@ public class PopulatorController : MonoBehaviour
 		} while (!spawned);
 	}
 
-	void SpawnEnemy (int level)
+	IEnumerator SpawnEnemy (int level)
 	{
+		yield return new WaitForSeconds(enemySpawnTimer);
 		bool spawned = false;
 		do {
-			float z = Random.Range (GameProperties.bottom, GameProperties.top);
-			float x = Random.Range (GameProperties.left, GameProperties.right);
+			float z = GameProperties.bottom + 10.0f;
+			float x = (GameProperties.left+GameProperties.right)/2.0f;
 			if (canPut(enemySize, x, z)) {
 				GameObject e = (GameObject)Instantiate (enemy, new Vector3 (x, enemySize.y/2f, z), Quaternion.identity);
 				e.GetComponent<NavMeshAgent>().speed *= 1 + 0.20f*level;
@@ -79,7 +81,8 @@ public class PopulatorController : MonoBehaviour
 		for (int i = 0; i < 2 + level; ++i) {
 			SpawnSheep (level);
 		}
-		SpawnEnemy (level);
+		StartCoroutine(SpawnEnemy (level));
+
 	}
 
 	// Update is called once per frame
