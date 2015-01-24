@@ -15,6 +15,7 @@ public class StateController : MonoBehaviour {
 
 	public static void AddSheepSaved(GameObject sheep) {
 		_score += 1;
+		sheep.GetComponent<SheepController>().safe = true;
 		OnSheepSaved(sheep);
 	}
 

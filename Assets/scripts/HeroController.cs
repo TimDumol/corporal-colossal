@@ -83,6 +83,8 @@ public class HeroController : MonoBehaviour {
 			float distance = (this.transform.position - entrance.transform.position).sqrMagnitude;
 			if (distance < maxEntranceDistance) {
 				StateController.AddSheepSaved(carriedSheep);
+				carriedSheep.transform.position = Vector3.zero;
+				carriedSheep.SetActive (true);
 				carriedSheep = null;
 			} else {
 				carriedSheep.transform.position = transform.position;

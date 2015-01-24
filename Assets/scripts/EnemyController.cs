@@ -36,6 +36,8 @@ public class EnemyController : MonoBehaviour {
 		GameObject closest = null;
 
 		foreach(GameObject obj in objs) {
+			if (obj.GetComponent<SheepController>().safe)
+				continue;
 			Vector3 v = this.transform.position - obj.transform.position;
 			if (v.sqrMagnitude < distance) {
 				closest = obj;
