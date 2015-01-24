@@ -10,7 +10,7 @@ public class PopulatorController : MonoBehaviour
 
 	void Awake ()
 	{
-		StateController.OnGameStart += OnGameStart;
+		StateController.OnLevelStart += OnLevelStart;
 		sheepSize = sheep.transform.localScale;
 		enemySize = enemy.transform.localScale;
 	}
@@ -53,7 +53,7 @@ public class PopulatorController : MonoBehaviour
         } while (!spawned);
 	}
 
-	void OnGameStart ()
+	void OnLevelStart ()
 	{
 		for (int i = 0; i < 10; ++i) {
 			SpawnSheep ();

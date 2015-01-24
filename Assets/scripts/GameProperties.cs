@@ -27,6 +27,7 @@ public class GameProperties
 			return right - left;
 		}
 	}
+	public static int initialLives = 3;
 	public GameProperties ()
 	{
 	}

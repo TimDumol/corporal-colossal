@@ -14,8 +14,9 @@ public class EnemyController : MonoBehaviour {
 		MoveTowardsClosestSheep ();
 	}
 
-	void UtilizeSheep(GameObject sheep) {
-		Destroy (sheep);
+	void UtilizeSheep(GameObject sheep){
+			Destroy (sheep);
+			StateController.addSheepEaten ();
 	}
 
 	void KillPlayer(GameObject player) {
@@ -58,3 +59,4 @@ public class EnemyController : MonoBehaviour {
 		}
 	}
 }
+
