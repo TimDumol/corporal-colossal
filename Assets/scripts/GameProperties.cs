@@ -28,6 +28,7 @@ public class GameProperties
 		}
 	}
 	public static int initialLives = 3;
+	public const int MAX_SHEEP = 20;
 	public GameProperties ()
 	{
 	}

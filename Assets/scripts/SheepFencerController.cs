@@ -20,7 +20,9 @@ public class SheepFencerController : MonoBehaviour {
 	public static void FenceSheep(GameObject sheep) {
 		Debug.Log ("Sheep saved");
 		sheep.GetComponent<SheepController>().safe = true;
-		sheep.transform.position = new Vector3(0, 1, 0);
+		var pos = GameObject.Find ("Sheep Pen").transform.position;
+		pos.y = sheep.transform.position.y;
+		sheep.transform.position = pos;
 		sheep.SetActive(true);
 	}
 }

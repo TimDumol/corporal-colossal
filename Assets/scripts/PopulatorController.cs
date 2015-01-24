@@ -34,8 +34,9 @@ public class PopulatorController : MonoBehaviour
 
 	bool canPut(Vector3 size, float x, float z)
 	{
-		Vector3 penSize = GameObject.Find("Sheep Pen").transform.localScale;
-		if (Mathf.Abs(x) < penSize.x && Mathf.Abs(z) < penSize.z)
+		GameObject pen = GameObject.Find ("Sheep Pen");
+		//Vector3 penSize = pen.transform.localScale;
+		if (Mathf.Abs(x - pen.transform.position.x) <  30 && Mathf.Abs(z - pen.transform.position.z) < 20)
 			return false;
 		Vector3 start = new Vector3(x, size.x / 2f + 0.5f, z - size.z / 2f);
 		Vector3 end = new Vector3(x, size.x / 2f + 0.5f, z + size.z / 2f);
@@ -61,8 +62,8 @@ public class PopulatorController : MonoBehaviour
 		yield return new WaitForSeconds(enemySpawnTimer);
 		bool spawned = false;
 		do {
-			float z = GameProperties.bottom + 10.0f;
-			float x = (GameProperties.left+GameProperties.right)/2.0f;
+			float z = Random.Range (GameProperties.bottom, GameProperties.top);
+			float x = Random.Range (GameProperties.left, GameProperties.right);
 			if (canPut(enemySize, x, z)) {
 				GameObject e = (GameObject)Instantiate (enemy, new Vector3 (x, enemySize.y/2f, z), Quaternion.identity);
 				e.GetComponent<NavMeshAgent>().speed *= 1 + 0.10f*level;
@@ -78,7 +79,7 @@ public class PopulatorController : MonoBehaviour
 	void OnLevelStart (int level)
 	{
 		SpawnPlayer ();
-		for (int i = 0; i < 2 + level; ++i) {
+		for (int i = 0; i < Mathf.Min (GameProperties.MAX_SHEEP, 2 + level); ++i) {
 			SpawnSheep (level);
 		}
 		StartCoroutine(SpawnEnemy (level));

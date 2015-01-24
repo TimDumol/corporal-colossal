@@ -21,9 +21,6 @@ public class SheepMath : MonoBehaviour {
 				distance = dist;
 			}
 		}
-		Vector3 ds = finder.transform.position - closest.transform.position;
-		Debug.Log ("Sqrt original: "+Mathf.Sqrt (SheepMath.SqrMagnitude2D(ds)));
-		Debug.Log ("Closest sheep: " + distance);
 		return closest;
 	}
 
