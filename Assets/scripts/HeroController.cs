@@ -87,6 +87,8 @@ public class HeroController : MonoBehaviour {
 				carriedSheep = null;
 				StateController.AddSheepSaved(tmp);
 			} else {
+
+				Renderer renderer = GetComponentInChildren<Renderer>();
 				Vector3 dPos = new Vector3(
 					renderer.bounds.extents.x * Mathf.Sign(transform.position.x),
 					0f,
