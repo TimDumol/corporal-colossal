@@ -9,6 +9,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 469106}
   - 212: {fileID: 21269106}
+  - 95: {fileID: 9565450}
   m_Layer: 0
   m_Name: Sheep Renderer
   m_TagString: Untagged
@@ -88,6 +89,21 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 4, y: 4, z: 7}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!95 &9565450
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 169106}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 552d1dd0f18ef4f4f8377c25d25cb632, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 1
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!95 &9569206
 Animator:
   serializedVersion: 3

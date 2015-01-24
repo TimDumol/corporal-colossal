@@ -10,6 +10,21 @@ public class HeroController : MonoBehaviour {
 	private bool spaceIsHeld = false;
 	private bool shouldPickupSheep = false;
 	private bool shouldDropSheep = false;
+	private Animator animator;
+
+	void Start ()
+	{
+		animator = transform.FindChild ("Player Renderer").GetComponent<Animator>();
+	}
+
+	void UpdateTransformScale (float dx) {
+		if (Mathf.Abs (dx) > 0) {
+			float x = -Mathf.Sign (dx) * Mathf.Abs(transform.localScale.x);
+			float y = transform.localScale.y;
+			float z = transform.localScale.z;
+			transform.localScale = new Vector3(x, y, z);
+		}
+	}
 
 	// Update is called once per frame
 	void FixedUpdate ()
@@ -18,9 +33,14 @@ public class HeroController : MonoBehaviour {
 		float v = Input.GetAxis("Vertical");
 		Vector3 movement = new Vector3(h, 0.0f, v);
 		transform.position += movement * Time.deltaTime * moveSpeed;
-		if (h != 0 || v != 0) {
-			// transform.rotation = Quaternion.LookRotation(movement);
+		UpdateTransformScale (h);
+
+		if (Mathf.Abs(h) > 0 || Mathf.Abs(v) > 0) {
+			animator.SetBool ("Walking", true);
+		} else {
+			animator.SetBool ("Walking", false);
 		}
+
 		if (spaceIsHeld) {
 			Debug.Log ("yes, space is held");
 			if (carriedSheep) {
@@ -68,6 +88,7 @@ public class HeroController : MonoBehaviour {
 			if (distance < maxSheepPickupDistance) {
 				sheep.SetActive (false);
 				carriedSheep = sheep;
+				animator.SetBool ("CarryingSheep", true);
 				return carriedSheep;
 			}
 		}
@@ -86,6 +107,7 @@ public class HeroController : MonoBehaviour {
 				GameObject tmp = carriedSheep;
 				carriedSheep = null;
 				StateController.AddSheepSaved(tmp);
+				animator.SetBool ("CarryingSheep", false);
 			} else {
 				Vector3 dPos = new Vector3(
 					renderer.bounds.extents.x * Mathf.Sign(transform.position.x),
@@ -95,6 +117,7 @@ public class HeroController : MonoBehaviour {
 				carriedSheep.rigidbody.velocity = Vector3.zero;
 				carriedSheep.SetActive (true);
 				carriedSheep = null;
+				animator.SetBool ("CarryingSheep", false);
 			}
 		}
 	}

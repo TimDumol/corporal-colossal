@@ -16,6 +16,20 @@ public class SheepController : MonoBehaviour
 		navAgent.updateRotation = false;
 		safe = false;
 	}
+	
+	void UpdateTransformScale (float dx) {
+		if (Mathf.Abs (dx) > 0) {
+			float x = -Mathf.Sign (dx) * Mathf.Abs(transform.localScale.x);
+			float y = transform.localScale.y;
+			float z = transform.localScale.z;
+			transform.localScale = new Vector3(x, y, z);
+		}
+	}
+
+	void FixedUpdate()
+	{
+		UpdateTransformScale(rigidbody.velocity.x + navAgent.velocity.x);
+	}
 
 	void Update ()
 	{
