@@ -16,7 +16,9 @@ public class HeroController : MonoBehaviour {
 		float v = Input.GetAxis("Vertical");
 		Vector3 movement = new Vector3(h, 0.0f, v);
 		transform.position += movement * Time.deltaTime * moveSpeed;
-		transform.rotation = Quaternion.LookRotation(movement);
+		if (h != 0 || v != 0) {
+			transform.rotation = Quaternion.LookRotation(movement);
+		}
 		if (shouldPickupSheep) {
 			PickUpClosestSheep ();
 			shouldPickupSheep = false;
