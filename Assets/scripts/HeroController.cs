@@ -22,7 +22,9 @@ public class HeroController : MonoBehaviour {
 			// transform.rotation = Quaternion.LookRotation(movement);
 		}
 		if (spaceIsHeld) {
+			Debug.Log ("yes, space is held");
 			if (carriedSheep) {
+				Debug.Log("trying to drop the fucker");
 				DropSheep();
 			} else {
 				PickUpClosestSheep();
@@ -76,6 +78,7 @@ public class HeroController : MonoBehaviour {
 	{
 		if (carriedSheep != null)
 		{
+			Debug.Log ("Yes, carried");
 			GameObject entrance = FindClosestGameObjectWithTag("Pen Entrance");
 			float distance = SheepMath.SqrMagnitude2D(this.transform.position - entrance.transform.position);
 			Debug.Log ("distance " + distance + " " + maxEntranceDistance);

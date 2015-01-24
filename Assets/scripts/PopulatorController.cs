@@ -16,10 +16,10 @@ public class PopulatorController : MonoBehaviour
 		GameObject tmp = Instantiate (sheep, new Vector3 (-100, -100, -100), Quaternion.identity) as GameObject;
 		sheepSize = tmp.collider.bounds.size;
 		Destroy (tmp);
-		tmp = Instantiate (enemy, new Vector3 (-100, -100, -100), Quaternion.identity) as GameObject;
+		tmp = Instantiate (enemy, new Vector3 (-1000, -1000, -1000), Quaternion.identity) as GameObject;
 		enemySize = tmp.collider.bounds.size;
 		Destroy (tmp);
-		tmp = Instantiate (player, new Vector3 (-100, -100, -100), Quaternion.identity) as GameObject;
+		tmp = Instantiate (player, new Vector3 (-10000, -10000, -10000), Quaternion.identity) as GameObject;
 		playerSize = tmp.collider.bounds.size;
 		Destroy (tmp);
 		Debug.Log (string.Format ("my sheep size is: {0}; {1}; {2}", sheepSize, enemySize, playerSize));
@@ -31,19 +31,27 @@ public class PopulatorController : MonoBehaviour
 		//Debug.Log (string.Format ("my size is : {0}; {1}", sheepSize, sheep.collider.bounds));
 	}
 
+	bool canPut(Vector3 size, float x, float z)
+	{
+		Vector3 penSize = GameObject.Find("Sheep Pen").transform.localScale;
+		if (Mathf.Abs(x) < penSize.x && Mathf.Abs(z) < penSize.z)
+			return false;
+		Vector3 start = new Vector3(x, size.x / 2f + 0.5f, z - size.z / 2f);
+		Vector3 end = new Vector3(x, size.x / 2f + 0.5f, z + size.z / 2f);
+		float radius = size.x / 2f;
+		return (!Physics.CheckCapsule(start, end ,radius));
+	}
+	
 	void SpawnSheep (int level)
 	{
 		bool spawned = false;
 		do {
 			float z = Random.Range (GameProperties.bottom, GameProperties.top);
 			float x = Random.Range (GameProperties.left, GameProperties.right);
-			Debug.Log (string.Format ("Generated: {0}, {1}; sheep size is: {2} ", x, z, sheepSize));
-			if (!Physics.CheckCapsule (new Vector3(x - sheepSize.x/2f, z/2f + 0.5f, z), new Vector3(x + sheepSize.x/2f, z/2f + 0.5f, z), z/2f)) {
-				Debug.Log (string.Format ("Pass: {0}, {1}; sheep size is: {2}; spawning at {3}", x, z, sheepSize, sheepSize.y/2));
+			if (canPut(sheepSize, x, z)) {
 				Instantiate (sheep, new Vector3 (x, sheepSize.y/2, z), Quaternion.identity);
 				spawned = true;
 			}
-
 		} while (!spawned);
 	}
 
@@ -53,14 +61,11 @@ public class PopulatorController : MonoBehaviour
 		do {
 			float z = Random.Range (GameProperties.bottom, GameProperties.top);
 			float x = Random.Range (GameProperties.left, GameProperties.right);
-			Debug.Log (string.Format ("Generated: {0}, {1}; enemy size is: {2} ", x, z, enemySize));
-			if (!Physics.CheckCapsule (new Vector3(x - enemySize.x/2f, z/2f + 0.5f, z), new Vector3(x + enemySize.x/2f, z/2f + 0.5f, z), z/2f)) {
-				Debug.Log (string.Format ("Pass: {0}, {1}; enemy size is: {2} ", x, z, enemySize));
+			if (canPut(enemySize, x, z)) {
 				GameObject e = (GameObject)Instantiate (enemy, new Vector3 (x, enemySize.y/2f, z), Quaternion.identity);
 				e.GetComponent<NavMeshAgent>().speed *= 1 + 0.20f*level;
-                spawned = true;
-            }
-            
+				spawned = true;
+			}
         } while (!spawned);
 	}
 

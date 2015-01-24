@@ -25,7 +25,6 @@ GameObject:
   - 4: {fileID: 426260}
   - 33: {fileID: 3326260}
   - 65: {fileID: 6526260}
-  - 23: {fileID: 2326260}
   m_Layer: 0
   m_Name: Pen Entrance
   m_TagString: Pen Entrance
@@ -43,7 +42,6 @@ GameObject:
   - 4: {fileID: 426262}
   - 33: {fileID: 3326262}
   - 65: {fileID: 6526262}
-  - 23: {fileID: 2326262}
   m_Layer: 0
   m_Name: Pen Entrance
   m_TagString: Pen Entrance
@@ -61,7 +59,6 @@ GameObject:
   - 4: {fileID: 426264}
   - 33: {fileID: 3326264}
   - 65: {fileID: 6526264}
-  - 23: {fileID: 2326264}
   m_Layer: 0
   m_Name: Pen Entrance
   m_TagString: Pen Entrance
@@ -79,7 +76,6 @@ GameObject:
   - 4: {fileID: 460010}
   - 33: {fileID: 3360010}
   - 65: {fileID: 6560010}
-  - 23: {fileID: 2360010}
   m_Layer: 0
   m_Name: Pen Entrance
   m_TagString: Pen Entrance
@@ -166,8 +162,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100836}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: .5, z: 0}
-  m_LocalScale: {x: 9.33407307, y: 3, z: 5.99999905}
+  m_LocalPosition: {x: 0, y: .5, z: .200000003}
+  m_LocalScale: {x: 9.33407307, y: 1, z: 5.99999905}
   m_Children:
   - {fileID: 488238}
   - {fileID: 488240}
@@ -235,7 +231,7 @@ Transform:
   m_GameObject: {fileID: 188238}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: .449999958, y: 0, z: 0}
-  m_LocalScale: {x: .100000001, y: 1, z: .999999881}
+  m_LocalScale: {x: .100000001, y: 10, z: .999999881}
   m_Children: []
   m_Father: {fileID: 400836}
   m_RootOrder: 0
@@ -245,9 +241,9 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 188240}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 3.2584137e-07, w: -1}
   m_LocalPosition: {x: -.449999988, y: 0, z: 0}
-  m_LocalScale: {x: .0999999568, y: 1, z: .99999994}
+  m_LocalScale: {x: .0999999568, y: 10, z: 1}
   m_Children: []
   m_Father: {fileID: 400836}
   m_RootOrder: 1
@@ -259,7 +255,7 @@ Transform:
   m_GameObject: {fileID: 188242}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0, y: 0, z: .449999988}
-  m_LocalScale: {x: 1, y: 1, z: .100000001}
+  m_LocalScale: {x: 1, y: 10, z: .100000001}
   m_Children: []
   m_Father: {fileID: 400836}
   m_RootOrder: 2
@@ -271,90 +267,10 @@ Transform:
   m_GameObject: {fileID: 188244}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -.449999988}
-  m_LocalScale: {x: 1, y: 1, z: .100000016}
+  m_LocalScale: {x: 1, y: 10, z: .100000016}
   m_Children: []
   m_Father: {fileID: 400836}
   m_RootOrder: 3
---- !u!23 &2326260
-Renderer:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 126260}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_LightmapIndex: 255
-  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
-  m_Materials:
-  - {fileID: 2100000, guid: b9a268fc98c474f721ff8c9bf8f5160e, type: 2}
-  m_SubsetIndices: 
-  m_StaticBatchRoot: {fileID: 0}
-  m_UseLightProbes: 0
-  m_LightProbeAnchor: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
---- !u!23 &2326262
-Renderer:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 126262}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_LightmapIndex: 255
-  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
-  m_Materials:
-  - {fileID: 2100000, guid: b9a268fc98c474f721ff8c9bf8f5160e, type: 2}
-  m_SubsetIndices: 
-  m_StaticBatchRoot: {fileID: 0}
-  m_UseLightProbes: 0
-  m_LightProbeAnchor: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
---- !u!23 &2326264
-Renderer:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 126264}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_LightmapIndex: 255
-  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
-  m_Materials:
-  - {fileID: 2100000, guid: b9a268fc98c474f721ff8c9bf8f5160e, type: 2}
-  m_SubsetIndices: 
-  m_StaticBatchRoot: {fileID: 0}
-  m_UseLightProbes: 0
-  m_LightProbeAnchor: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
---- !u!23 &2360010
-Renderer:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 160010}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_LightmapIndex: 255
-  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
-  m_Materials:
-  - {fileID: 2100000, guid: b9a268fc98c474f721ff8c9bf8f5160e, type: 2}
-  m_SubsetIndices: 
-  m_StaticBatchRoot: {fileID: 0}
-  m_UseLightProbes: 0
-  m_LightProbeAnchor: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
 --- !u!23 &2388238
 Renderer:
   m_ObjectHideFlags: 1
@@ -367,7 +283,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: aede28218dcba460fa20a6289ea77ed3, type: 2}
+  - {fileID: 2100000, guid: 176c0fef645ac4731a11bcd64d3c42bb, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -387,7 +303,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: aede28218dcba460fa20a6289ea77ed3, type: 2}
+  - {fileID: 2100000, guid: 176c0fef645ac4731a11bcd64d3c42bb, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -407,7 +323,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: aede28218dcba460fa20a6289ea77ed3, type: 2}
+  - {fileID: 2100000, guid: 07290db7ff91a4021a7c5de3e9a1b8b8, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -427,7 +343,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: aede28218dcba460fa20a6289ea77ed3, type: 2}
+  - {fileID: 2100000, guid: 07290db7ff91a4021a7c5de3e9a1b8b8, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
