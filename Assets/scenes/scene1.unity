@@ -152,6 +152,14 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 428810, guid: 301fca053682d4e3680227d37cf481ef, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 428810, guid: 301fca053682d4e3680227d37cf481ef, type: 2}
+      propertyPath: m_LocalScale.z
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 301fca053682d4e3680227d37cf481ef, type: 2}
   m_RootGameObject: {fileID: 2028161629}
@@ -458,6 +466,7 @@ GameObject:
   - 33: {fileID: 2028161633}
   - 136: {fileID: 2028161632}
   - 23: {fileID: 2028161631}
+  - 114: {fileID: 2028161634}
   m_Layer: 0
   m_Name: Sheep
   m_TagString: Sheep
@@ -473,7 +482,7 @@ Transform:
   m_GameObject: {fileID: 2028161629}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: .409999996, y: 1.58000004, z: -3.00999999}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3, y: 1, z: 3}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
@@ -520,6 +529,19 @@ MeshFilter:
   m_PrefabInternal: {fileID: 714352916}
   m_GameObject: {fileID: 2028161629}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &2028161634
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2028161629}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebd9ad81f44a04e4fad815b5420925c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isMoving: 1
+  moveSpeed: 0
 --- !u!1 &2126916332
 GameObject:
   m_ObjectHideFlags: 0
