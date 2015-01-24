@@ -37,7 +37,7 @@ public class EnemyController : MonoBehaviour {
 				distance = v.sqrMagnitude;
 			}
 		}
-
+		
 		return closest;
 	}
 

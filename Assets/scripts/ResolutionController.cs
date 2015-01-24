@@ -5,7 +5,6 @@ public class ResolutionController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		Debug.Log ("This is a test");
 		Screen.SetResolution (800, 800, false);
 	}
 
