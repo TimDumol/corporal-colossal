@@ -73,6 +73,7 @@ public class StateController : MonoBehaviour {
 		ResetLives ();
 		OnLevelStart (StateController.level);
 		player = GameObject.FindGameObjectWithTag ("Player");
+		Debug.Log (string.Format ("Found this guy: {0}", player));
     }
 
 	public static int CountUnsafeSheep () {
@@ -83,6 +84,8 @@ public class StateController : MonoBehaviour {
 				unsafeSheep += 1;
 			}
 		}
+		Debug.Log (string.Format ("The player is {0}", player));
+		Debug.Log (string.Format ("its controller is {0}", player.GetComponent<HeroController> ()));
 		if (player.GetComponent<HeroController> ().carriedSheep) {
 			unsafeSheep += 1;
 		}
@@ -112,9 +115,9 @@ public class StateController : MonoBehaviour {
 	}
 
 	static void ClearLevel() {
-		DestroyAllGameObjectsWithTag ("Player");
 		DestroyAllGameObjectsWithTag ("Sheep");
 		DestroyAllGameObjectsWithTag ("Enemy");
+		DestroyAllGameObjectsWithTag ("Player");
 	}
 
 	void OnLifeChanged (int lives) {

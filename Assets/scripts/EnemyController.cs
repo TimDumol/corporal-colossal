@@ -10,8 +10,7 @@ public class EnemyController : MonoBehaviour {
 		navAgent.updateRotation = false;
 	}
 
-	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
 		MoveTowardsClosestSheep ();
 	}
 
@@ -52,6 +51,7 @@ public class EnemyController : MonoBehaviour {
 	void OnCollisionEnter(Collision collision) {
 		Collider other = collision.collider;
 		if (other.gameObject.tag == "Sheep") {
+			Debug.Log ("Sheep collision la");
 			UtilizeSheep (other.gameObject);
 		} else if (other.gameObject.tag == "Player") {
 			KillPlayer (other.gameObject);
