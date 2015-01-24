@@ -3,6 +3,8 @@ using System.Collections;
 
 public class StateController : MonoBehaviour {
 
+	private static GameObject player;
+
 	public delegate void PreLevelStartAction();
 	public static event PreLevelStartAction PreLevelStart;
 	public delegate void LevelStartAction(int level);
@@ -73,6 +75,7 @@ public class StateController : MonoBehaviour {
 		PreLevelStart ();
 		ResetLives ();
 		OnLevelStart (StateController.level);
+		player = GameObject.FindGameObjectWithTag ("Player");
     }
 
 	public static int CountUnsafeSheep () {
@@ -82,6 +85,9 @@ public class StateController : MonoBehaviour {
 			if (!s.GetComponent<SheepController>().safe) {
 				unsafeSheep += 1;
 			}
+		}
+		if (player.GetComponent<HeroController> ().carriedSheep) {
+			unsafeSheep += 1;
 		}
 		return unsafeSheep;
 	}

@@ -80,14 +80,16 @@ public class HeroController : MonoBehaviour {
 			float distance = SheepMath.SqrMagnitude2D(this.transform.position - entrance.transform.position);
 			Debug.Log ("distance " + distance + " " + maxEntranceDistance);
 			if (distance < maxEntranceDistance) {
-				StateController.AddSheepSaved(carriedSheep);
+				GameObject tmp = carriedSheep;
 				carriedSheep = null;
+				StateController.AddSheepSaved(tmp);
 			} else {
 				Vector3 dPos = new Vector3(
 					renderer.bounds.extents.x * Mathf.Sign(transform.position.x),
 					0f,
 					renderer.bounds.extents.z * Mathf.Sign(transform.position.z));
 				carriedSheep.transform.position = transform.position + dPos;
+				carriedSheep.rigidbody.velocity = Vector3.zero;
 				carriedSheep.SetActive (true);
 				carriedSheep = null;
 			}
