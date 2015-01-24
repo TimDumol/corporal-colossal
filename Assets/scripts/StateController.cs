@@ -1,9 +1,11 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class StateController : MonoBehaviour {
 
 	private static GameObject player;
+
 
 	public delegate void PreLevelStartAction();
 	public static event PreLevelStartAction PreLevelStart;
@@ -13,6 +15,8 @@ public class StateController : MonoBehaviour {
 	public static event LifeChangeAction OnLifeChange;
 	public delegate void ScoreChangeAction (int score);
 	public static event ScoreChangeAction OnScoreChange;
+	public delegate void EndGameAction(int score);
+	public static event EndGameAction OnEndGame;
 
 	public static int level;
 	private static int _lives;
@@ -41,6 +45,7 @@ public class StateController : MonoBehaviour {
 	public static void addPlayerDeath(GameObject player) {
 		_lives -= 1;
 		OnLifeChange (lives);
+
 	}
 
 	public static void AddSheepSaved(GameObject sheep) {
@@ -56,7 +61,9 @@ public class StateController : MonoBehaviour {
 		PreLevelStart += () => {};
 		OnLevelStart += (int level) => {};
 		OnLifeChange += (int lives) => {};
+		OnLifeChange += CheckGameOver;
 		OnScoreChange += (int score) => {};
+		OnEndGame += (int score) => {};
 	}
 
 	public static void ResetLives() {
@@ -86,6 +93,14 @@ public class StateController : MonoBehaviour {
 			unsafeSheep += 1;
 		}
 		return unsafeSheep;
+	}
+
+	static void CheckGameOver(int lives) {
+		if (lives <= 0) {
+			// Game over.
+			Time.timeScale = 0;
+			OnEndGame(score);
+        }
 	}
 
 	static void CheckLevelOver() {

@@ -29,7 +29,7 @@ public class EnemyController : MonoBehaviour {
 	IEnumerator UtilizeSheep(GameObject sheep){
 		speed = navAgent.speed;
 		navAgent.speed = 0;
-		navAgent.velocity = Vector3.zero;
+		rigidbody.velocity = navAgent.velocity = Vector3.zero;
 		animator.SetBool ("Loving", true);
 		EliminateSheep (sheep);
 		yield return new WaitForSeconds(1.0f);
