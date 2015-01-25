@@ -62,6 +62,9 @@ public class HeroController : MonoBehaviour {
 		if (this.carriedSheep == null)
 		{
 			GameObject sheep = SheepMath.FindClosestUnsafeSheep (this.gameObject);
+			if (sheep == null) {
+				return null;
+			}
 			float distance = SheepMath.DistanceBetween2DGameObjects(this.gameObject, sheep.gameObject);
 			if (distance < maxSheepPickupDistance) {
 				sheep.SetActive (false);

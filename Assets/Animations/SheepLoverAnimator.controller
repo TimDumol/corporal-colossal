@@ -112,7 +112,7 @@ State:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: SheepLovingAnimation
-  m_Speed: 1
+  m_Speed: .5
   m_CycleOffset: 0
   m_Motions:
   - {fileID: 7400000, guid: 495b21b41172251438dab8893bd726cb, type: 2}
@@ -151,13 +151,13 @@ StateMachine:
   m_ChildStateMachinePosition: []
   m_OrderedTransitions:
     data:
-      first: {fileID: 110287340}
-      second:
-      - {fileID: 110168830}
-    data:
       first: {fileID: 110288696}
       second:
       - {fileID: 110152386}
+    data:
+      first: {fileID: 110287340}
+      second:
+      - {fileID: 110168830}
   m_MotionSetCount: 1
   m_AnyStatePosition: {x: 60, y: -48, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
