@@ -18,6 +18,7 @@ public class HeroController : MonoBehaviour {
 	// Update is called once per frame
 	void FixedUpdate ()
 	{
+		rigidbody.velocity = Vector3.zero;
 		float h = Input.GetAxis("Horizontal");
 		float v = Input.GetAxis("Vertical");
 		Vector3 movement = new Vector3(h, 0.0f, v);
