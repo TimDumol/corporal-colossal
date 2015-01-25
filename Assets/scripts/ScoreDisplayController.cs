@@ -6,12 +6,13 @@ public class ScoreDisplayController : MonoBehaviour {
 
 	public Text scoreText;
 	private GameObject levelCanvas;
+	private Text instance;
 
 	// Use this for initialization
 	void Start () {
-		StateController.PreLevelStart += FindLevelCanvas;
 		StateController.OnLevelStart += ShowScore;
 		StateController.OnScoreChange += ShowScore;
+		ShowScore (0);
 	}
 	
 	// Update is called once per frame
@@ -19,12 +20,12 @@ public class ScoreDisplayController : MonoBehaviour {
 	
 	}
 
-	void FindLevelCanvas() {
-		levelCanvas = GameObject.FindGameObjectWithTag("LevelCanvas");
-	}
-
 	void ShowScore (int score) {
-		Text instance = Instantiate (scoreText) as Text;
+		levelCanvas = GameObject.FindGameObjectWithTag("LevelCanvas");
+		if (instance != null) {
+						Destroy (instance);
+				}
+		instance = Instantiate (scoreText) as Text;
 		instance.text = string.Format("SCORE: {0}", score);
 		instance.transform.SetParent (levelCanvas.transform, false);
 	}
