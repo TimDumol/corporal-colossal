@@ -6,7 +6,7 @@ public class LivesDisplayController : MonoBehaviour {
 	public Image lifeDisplay;
 	private GameObject levelCanvas;
 	private List<Image> lifeDisplays;
-	private const int LIFE_PADDING = 10;
+	private const int LIFE_PADDING = 2;
 	void Awake () {
 		StateController.OnLifeChange += UpdateLivesDisplay;
 		StateController.PreLevelStart += FindLevelCanvas;
