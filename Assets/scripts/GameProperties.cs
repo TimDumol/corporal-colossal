@@ -34,7 +34,7 @@ public class GameProperties
 			return right - left;
 		}
 	}
-	public static int initialLives = 3;
+	public static int initialLives = 1;
 	public const int MAX_SHEEP = 20;
 	public GameProperties ()
 	{
