@@ -15,6 +15,8 @@ public class StateController : MonoBehaviour {
 	public static event LifeChangeAction OnLifeChange;
 	public delegate void ScoreChangeAction (int score);
 	public static event ScoreChangeAction OnScoreChange;
+	public delegate void LevelEndAction(int level);
+	public static event LevelEndAction OnLevelEnd;
 	public delegate void EndGameAction(int score);
 	public static event EndGameAction OnEndGame;
 
@@ -64,6 +66,7 @@ public class StateController : MonoBehaviour {
 		OnLifeChange += CheckGameOver;
 		OnScoreChange += (int score) => {};
 		OnEndGame += (int score) => {};
+		OnLevelEnd += (int level) => {};
 	}
 
 	public static void ResetLives() {
@@ -107,6 +110,7 @@ public class StateController : MonoBehaviour {
 		int unsafeSheep = StateController.CountUnsafeSheep ();
 		if (unsafeSheep == 0) {
 			ClearLevel();
+			OnLevelEnd(StateController.level);
 			StateController.level += 1;
 			if (StateController.OnLevelStart != null) {
 				StateController.OnLevelStart(StateController.level);
@@ -137,14 +141,5 @@ public class StateController : MonoBehaviour {
 			Debug.Log ("Game Over!");
 			// TODO: Go to game over screen.
 		}
-	}
-
-	void OnLevelWasLoaded(int levelId) {
-
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
 	}
 }

@@ -41,7 +41,6 @@ public class EnemyController : MonoBehaviour {
 		StateController.addSheepEaten (sheep);
 		animator.SetBool ("Loving", false);
 		navAgent.speed = speed;
-
 	}
 
 	void KillPlayer(GameObject player) {
@@ -94,7 +93,6 @@ public class EnemyController : MonoBehaviour {
 		Collider other = collision.collider;
 		if (!animator.GetBool ("loving") && other.gameObject.tag == "Sheep" && !other.gameObject.GetComponent<SheepController>().safe) {
 			Debug.Log (this);
-			Debug.Log ("sheep collision la");
 			StartCoroutine(UtilizeSheep (other.gameObject));
 		}
 	}
