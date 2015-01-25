@@ -6,20 +6,6 @@ public class StateController : MonoBehaviour {
 
 	private static GameObject player;
 
-
-	public delegate void PreLevelStartAction();
-	public static event PreLevelStartAction PreLevelStart;
-	public delegate void LevelStartAction(int level);
-	public static event LevelStartAction OnLevelStart;
-	public delegate void LifeChangeAction (int lives);
-	public static event LifeChangeAction OnLifeChange;
-	public delegate void ScoreChangeAction (int score);
-	public static event ScoreChangeAction OnScoreChange;
-	public delegate void LevelEndAction(int level);
-	public static event LevelEndAction OnLevelEnd;
-	public delegate void EndGameAction(int score);
-	public static event EndGameAction OnEndGame;
-
 	public static int level;
 	private static int _lives;
 	public static int lives {
@@ -39,14 +25,14 @@ public class StateController : MonoBehaviour {
 		if (_lives > 0) {
 			_lives -= 1;
 		}
-		OnLifeChange (lives);
+		GameObject.Find ("StateController").GetComponent<StateController>().OnLifeChangeSub (lives);
 
 		StateController.CheckLevelOver ();
 	}
 
 	public static void addPlayerDeath(GameObject player) {
 		_lives -= 1;
-		OnLifeChange (lives);
+		GameObject.Find ("StateController").GetComponent<StateController>().OnLifeChangeSub (lives);
 
 	}
 
@@ -54,37 +40,62 @@ public class StateController : MonoBehaviour {
 		_score += 1;
 		SheepFencerController.FenceSheep (sheep);
 		StateController.OnSheepSaved (sheep);
-		OnScoreChange(_score);
+		GameObject.Find ("StateController").GetComponent<StateController>().OnScoreChangeSub(_score);
+	}
+
+	public void OnLifeChangeSub(int lives) {
+		GameObject.Find ("LivesDisplayController").GetComponent<LivesDisplayController> ().UpdateLivesDisplay (lives);
+		CheckGameOver (lives);
 	}
 
 	void Awake () {
 		Random.seed = System.Environment.TickCount;
-
-		PreLevelStart += () => {};
-		OnLevelStart += (int level) => {};
-		OnLifeChange += (int lives) => {};
-		OnLifeChange += CheckGameOver;
-		OnScoreChange += (int score) => {};
-		OnEndGame += (int score) => {};
-		OnLevelEnd += (int level) => {};
 	}
 
 	public static void ResetLives() {
 		_lives = GameProperties.initialLives;
-		OnLifeChange (lives);
+		GameObject.Find ("StateController").GetComponent<StateController>().OnLifeChangeSub (lives);
 	}
 
 	// Use this for initialization
 	void Start () {
-		Init ();
+		//StartCoroutine(DelayedInit ());
     }
+
+	public IEnumerator DelayedInit() {
+		yield return new WaitForSeconds (1);
+		Init ();
+	}
+
+	public void OnLevelStartSub(int level) {
+		Debug.Log ("SPAWNING AND CRAP");
+		GameObject.Find ("PopulatorController").GetComponent<PopulatorController> ().OnLevelStart (level);
+		BackgroundMusicController.GetInstance ().StartBleeping (level);
+		//GameObject.Find ("BackgroundMusicController").GetComponent<BackgroundMusicController> ().StartBleeping (level);
+		GameObject.Find ("Scorebar").GetComponent<ScoreDisplayController> ().ShowScore (level);
+	}
+
+	public void OnLevelEndSub(int level) {
+		BackgroundMusicController.GetInstance ().StopBleeping (level);
+		//GameObject.Find ("BackgroundMusicController").GetComponent<BackgroundMusicController> ().StopBleeping (level);
+	}
+
+	public void OnScoreChangeSub(int score) {
+		GameObject.Find ("Scorebar").GetComponent<ScoreDisplayController> ().ShowScore (score);
+	}
+
+	public void OnLevelWasLoaded(int level) {
+		if (level == 1) {
+			Debug.Log ("noted");
+			StartCoroutine(DelayedInit ());
+		}
+	}
 
 	public void Init() {
 		StateController.level = 1;
-		PreLevelStart ();
 		ResetLives ();
-		OnLevelStart (StateController.level);
-
+		//OnLevelStart (StateController.level);
+		OnLevelStartSub (level);
 	}
 
 	public static int CountUnsafeSheep () {
@@ -106,19 +117,24 @@ public class StateController : MonoBehaviour {
 		if (lives <= 0) {
 			// Game over.
 			Time.timeScale = 0;
-			OnEndGame(score);
+			GameObject.Find ("StateController").GetComponent<StateController>().OnEndGameSub(score);
         }
+	}
+
+	public void OnEndGameSub(int score) {
+		GameObject.Find ("GameOverController").GetComponent<GameOverController> ().ShowGameOver (score);
 	}
 
 	static void CheckLevelOver() {
 		int unsafeSheep = StateController.CountUnsafeSheep ();
 		if (unsafeSheep == 0) {
 			ClearLevel();
-			OnLevelEnd(StateController.level);
+			GameObject.Find ("StateController").GetComponent<StateController>().OnLevelEndSub(StateController.level);
+		
 			StateController.level += 1;
-			if (StateController.OnLevelStart != null) {
-				StateController.OnLevelStart(StateController.level);
-			}
+           
+				GameObject.Find ("StateController").GetComponent<StateController>().OnLevelStartSub(StateController.level);
+
 		}
 	}
 

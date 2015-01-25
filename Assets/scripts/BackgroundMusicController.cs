@@ -18,20 +18,24 @@ public class BackgroundMusicController : MonoBehaviour {
 			Destroy (this.gameObject);
 			return;
 		} else {
+
 			singleton = this;
 		}
 		bleeps = new [] {bleep1, bleep2, bleep3};
-		StateController.OnLevelStart += StartBleeping;
-		StateController.OnLevelEnd += StopBleeping;
+
 		DontDestroyOnLoad (this.gameObject);
 	}
 
-	void StartBleeping(int level) {
+	void Start() {
+
+	}
+
+	public void StartBleeping(int level) {
 		bleeping = true;
  		StartCoroutine (BleepOccasionally ());
 	}
 
-	void StopBleeping(int level) {
+	public void StopBleeping(int level) {
 		StopCoroutine ("BleepOccasionally");
 		bleeping = false;
 	}

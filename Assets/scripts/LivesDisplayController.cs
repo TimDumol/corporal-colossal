@@ -8,21 +8,17 @@ public class LivesDisplayController : MonoBehaviour {
 	private List<Image> lifeDisplays;
 	private const int LIFE_PADDING = 2;
 	void Awake () {
-		StateController.OnLifeChange += UpdateLivesDisplay;
-		StateController.PreLevelStart += FindLevelCanvas;
+
 		lifeDisplays = new List<Image>();
 	}
 
 	// Use this for initialization
 	void Start () {
-
 	}
+	
 
-	void FindLevelCanvas() {
+	public void UpdateLivesDisplay(int lives) {
 		levelCanvas = GameObject.FindGameObjectWithTag("LevelCanvas");
-	}
-
-	void UpdateLivesDisplay(int lives) {
 		if (lifeDisplays.Count > lives) {
 			for (int i = lives; i < lifeDisplays.Count; ++i) {
 				Destroy (lifeDisplays[i]);
