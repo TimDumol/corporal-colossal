@@ -39,6 +39,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2fd8e92bcf10764581e1c26619bec13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  namePseudofield: {fileID: 11440270, guid: 73dcedf06d4220447811c48b8fd1b85b, type: 2}
   gameOverImage: {fileID: 11450302, guid: 966e1dc9e986354449369bca291377cd, type: 2}
 --- !u!1001 &100100000
 Prefab:
