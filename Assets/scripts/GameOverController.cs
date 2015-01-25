@@ -67,7 +67,7 @@ public class GameOverController : MonoBehaviour {
 
 		Button instance4 = Instantiate (titleButton) as Button;
 		instance4.transform.SetParent (levelCanvas.transform, false);
-		instance4.onClick.AddListener(() => {GoToTitle();});
+		instance4.onClick.AddListener(() => {GoToTitle();Debug.Log ("SHIT");});
 
 		Image instance5 = Instantiate (EndScoreRibbon) as Image;
 		instance5.transform.SetParent (levelCanvas.transform, false);
