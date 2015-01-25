@@ -78,7 +78,7 @@ public class HeroController : MonoBehaviour {
 				Renderer renderer = GetComponentInChildren<Renderer>();
 
 				Vector3 dPos = Vector3.right;
-				if (transform.position.z > 0) {
+				if (transform.position.z > (GameProperties.top - GameProperties.bottom) / 2f) {
 					// on upper half, to handle the case where the sheep is being dropped beyond the N barrier
 					dPos = new Vector3(
 						2 * collider.bounds.extents.x * Mathf.Sign(transform.position.x),
