@@ -5,12 +5,13 @@ public class EnemyController : MonoBehaviour {
 	private NavMeshAgent navAgent;
 	private Animator animator;
 	private float speed;
-
+	public AudioSource utilizationSound;
 	// Use this for initialization
 	void Start () {
 		navAgent = this.GetComponent<NavMeshAgent>();
 		navAgent.updateRotation = false;
 		animator = transform.GetComponentInChildren<Animator>();
+		utilizationSound = GetComponent<AudioSource> ();
 	}
 
 	void FixedUpdate () {
@@ -36,7 +37,8 @@ public class EnemyController : MonoBehaviour {
 		rigidbody.velocity = navAgent.velocity = Vector3.zero;
 		animator.SetBool ("Loving", true);
 		EliminateSheep (sheep);
-		yield return new WaitForSeconds(1.0f);
+		utilizationSound.Play ();
+		yield return new WaitForSeconds(2.0f);
 
 		StateController.addSheepEaten (sheep);
 		animator.SetBool ("Loving", false);
