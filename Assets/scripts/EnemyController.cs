@@ -52,6 +52,13 @@ public class EnemyController : MonoBehaviour {
 		GameObject sheep = SheepMath.FindClosestUnsafeSheep (this.gameObject);
 		if (sheep != null) {
 			navAgent.SetDestination (sheep.transform.position);
+		} else {
+			navAgent.SetDestination(SheepMath.GetRandomPlaceToGoTo(
+				this.gameObject,
+				GameProperties.topPadded,
+				GameProperties.rightPadded,
+				GameProperties.bottomPadded,
+				GameProperties.leftPadded));
 		}
 	}
 

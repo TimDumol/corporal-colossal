@@ -75,8 +75,6 @@ public class HeroController : MonoBehaviour {
 				StateController.AddSheepSaved(tmp);
 				animator.SetBool ("CarryingSheep", false);
 			} else {
-				Renderer renderer = GetComponentInChildren<Renderer>();
-
 				Vector3 dPos = Vector3.right;
 				if (transform.position.z > (GameProperties.top - GameProperties.bottom) / 2f) {
 					// on upper half, to handle the case where the sheep is being dropped beyond the N barrier

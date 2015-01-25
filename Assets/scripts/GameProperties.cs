@@ -17,6 +17,13 @@ public class GameProperties
 	public static int bottom = -50;
 	public static int left = -50;
 	public static int right = 50;
+
+	public static int padding = 5; // For random walks to always be reachable
+	public static int topPadded { get { return top - padding;}}
+	public static int bottomPadded { get { return bottom + padding;}}
+	public static int leftPadded { get { return left + padding;}}
+	public static int rightPadded { get { return right - padding;}}
+
 	public static int height {
 		get {
 			return top - bottom;
