@@ -1,11 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class StartGameButton : MonoBehaviour {
+public class BackButton : MonoBehaviour {
 
 	void OnMouseDown()
 	{
-		Application.LoadLevel(5);
+		Application.LoadLevel(0);
 		Time.timeScale = 0;
 	}
 }
