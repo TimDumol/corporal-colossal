@@ -2,10 +2,9 @@
 using System.Collections;
 
 public class StartGameButton : MonoBehaviour {
-
 	void OnMouseDown()
 	{
-		Application.LoadLevel(3);
-		Time.timeScale = 0;
+		Application.LoadLevel(1);
+		Time.timeScale = 1;
 	}
 }
