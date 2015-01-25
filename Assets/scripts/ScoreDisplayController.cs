@@ -25,7 +25,7 @@ public class ScoreDisplayController : MonoBehaviour {
 
 	void ShowScore (int score) {
 		Text instance = Instantiate (scoreText) as Text;
-		instance.text = string.Format("Score: {0}", score);
+		instance.text = string.Format("SCORE: {0}", score);
 		instance.transform.SetParent (levelCanvas.transform, false);
 	}
 }
