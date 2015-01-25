@@ -5,7 +5,7 @@ public class HighscoreButton : MonoBehaviour {
 
 	void OnMouseDown()
 	{
-		Application.LoadLevel(3);
+		Application.LoadLevel(4);
 		Time.timeScale = 0;
 	}
 }
