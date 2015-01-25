@@ -76,10 +76,20 @@ public class HeroController : MonoBehaviour {
 				animator.SetBool ("CarryingSheep", false);
 			} else {
 				Renderer renderer = GetComponentInChildren<Renderer>();
-				Vector3 dPos = new Vector3(
-					renderer.bounds.extents.x * Mathf.Sign(transform.position.x),
-					0f,
-					renderer.bounds.extents.z * Mathf.Sign(transform.position.z));
+
+				Vector3 dPos = Vector3.right;
+				if (transform.position.z > 0) {
+					// on upper half, to handle the case where the sheep is being dropped beyond the N barrier
+					dPos = new Vector3(
+						2 * collider.bounds.extents.x * Mathf.Sign(transform.position.x),
+						0f,
+						0f);
+				} else {
+					dPos = new Vector3(
+						2 * collider.bounds.extents.x * Mathf.Sign(transform.position.x),
+						0f,
+						2 * collider.bounds.extents.z * Mathf.Sign(transform.position.z));
+				}
 				carriedSheep.transform.position = transform.position + dPos;
 				carriedSheep.rigidbody.velocity = Vector3.zero;
 				carriedSheep.SetActive (true);
