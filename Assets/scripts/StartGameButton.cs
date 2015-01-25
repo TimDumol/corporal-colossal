@@ -5,7 +5,7 @@ public class StartGameButton : MonoBehaviour {
 
 	void OnMouseDown()
 	{
-		Application.LoadLevel(5);
+		Application.LoadLevel(3);
 		Time.timeScale = 0;
 	}
 }
