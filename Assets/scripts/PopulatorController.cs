@@ -83,7 +83,6 @@ public class PopulatorController : MonoBehaviour
 			SpawnSheep (level);
 		}
 		StartCoroutine(SpawnEnemy (level));
-
 	}
 
 	// Update is called once per frame
