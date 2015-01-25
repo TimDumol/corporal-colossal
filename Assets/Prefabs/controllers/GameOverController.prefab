@@ -40,7 +40,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   namePseudofield: {fileID: 11440270, guid: 73dcedf06d4220447811c48b8fd1b85b, type: 2}
+  EndScoreText: {fileID: 11425084, guid: f5478fd8f4c9ece40b03f426568e0427, type: 2}
   gameOverImage: {fileID: 11450302, guid: 966e1dc9e986354449369bca291377cd, type: 2}
+  restartButton: {fileID: 11487084, guid: 00455ee53287aae4ba13f67c05c6ef9c, type: 2}
+  titleButton: {fileID: 11437108, guid: 9ce05036bec8ee44089004db05ada779, type: 2}
+  addScoreButton: {fileID: 11463168, guid: 371c88a6411b5f4458b3c7891810f949, type: 2}
+  EndScoreRibbon: {fileID: 11481858, guid: 9a4593a923289294598714090081061a, type: 2}
+  NameInputRibbon: {fileID: 11475426, guid: 19be209779acfbd44b3889db3a419c9e, type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
