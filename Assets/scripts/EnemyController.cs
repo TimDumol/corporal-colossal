@@ -15,10 +15,14 @@ public class EnemyController : MonoBehaviour {
 
 	void FixedUpdate () {
 		if (!animator.GetBool ("Loving")) {
-				MoveTowardsClosestSheep ();
-				Vector3 scale = SheepMath.GetLocalScale (this.gameObject, rigidbody.velocity.x + navAgent.velocity.x);
-				transform.localScale = scale;
+			MoveTowardsClosestSheep ();
+			Vector3 scale = SheepMath.GetLocalScale (this.gameObject, rigidbody.velocity.x + navAgent.velocity.x);
+			transform.localScale = scale;
 		}
+	}
+
+	void Update () {
+		SheepMath.TranslateFor2D5View(this.gameObject);
 	}
 
 	void EliminateSheep(GameObject sheep) {

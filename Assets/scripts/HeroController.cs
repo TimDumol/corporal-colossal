@@ -36,7 +36,7 @@ public class HeroController : MonoBehaviour {
 			} else {
 				PickUpClosestSheep ();
 			}
-        }
+		}
 		spaceIsHeld = false;
 	}
 
@@ -44,6 +44,7 @@ public class HeroController : MonoBehaviour {
 		if (Input.GetButtonDown ("Jump")) {
 			spaceIsHeld = true;
 		}
+		SheepMath.TranslateFor2D5View(this.gameObject);
 	}
 
 	GameObject PickUpClosestSheep()

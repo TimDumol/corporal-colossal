@@ -81,4 +81,9 @@ public class SheepMath : MonoBehaviour {
 
 		return Mathf.Sqrt (dx * dx + dz * dz);
 	}
+
+	public static void TranslateFor2D5View (GameObject obj) {
+		float newY = (obj.collider.bounds.size.y/2f) + ((50-obj.transform.position.z) / 1000f);
+		obj.transform.position = new Vector3(obj.transform.position.x, newY, obj.transform.position.z);
+	}
 }

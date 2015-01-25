@@ -38,5 +38,6 @@ public class SheepController : MonoBehaviour
 
 			navAgent.SetDestination(new Vector3(newX, 0, newZ));
 		}
+		SheepMath.TranslateFor2D5View(this.gameObject);
 	}
 }
