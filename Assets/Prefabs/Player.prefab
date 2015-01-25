@@ -98,7 +98,7 @@ AudioSource:
   serializedVersion: 3
   m_audioClip: {fileID: 8300000, guid: cc5c0ff75eb0d425db3b9e94da218491, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: .100000001
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -175,6 +175,8 @@ MonoBehaviour:
   maxSheepPickupDistance: 3
   maxEntranceDistance: 3
   moveSpeed: 20
+  pickupClip: {fileID: 8300000, guid: 744347a1606494e649efa51c5414f657, type: 3}
+  dropClip: {fileID: 8300000, guid: 11247df3433524b26b57d533d271ce02, type: 3}
   carriedSheep: {fileID: 0}
 --- !u!212 &21235980
 SpriteRenderer:

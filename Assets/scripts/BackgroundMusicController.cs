@@ -27,7 +27,7 @@ public class BackgroundMusicController : MonoBehaviour {
 	IEnumerator BleepOccasionally() {
 		while (bleeping) {
 			int index = Random.Range (0, 2);
-			AudioSource.PlayClipAtPoint(bleeps[index], Vector3.zero);
+			AudioSource.PlayClipAtPoint(bleeps[index], Vector3.zero, 0.2f);
 			float waitTime = 1 + Random.value * 4;
 			yield return new WaitForSeconds(waitTime);
 		}

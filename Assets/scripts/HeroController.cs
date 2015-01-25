@@ -5,6 +5,8 @@ public class HeroController : MonoBehaviour {
 	public float maxSheepPickupDistance;
 	public float maxEntranceDistance;
 	public float moveSpeed;
+	public AudioClip pickupClip;
+	public AudioClip dropClip;
 	public GameObject carriedSheep;
 	private AudioSource walkingSound;
 	// space was pressed before last fixedupdate
@@ -62,11 +64,13 @@ public class HeroController : MonoBehaviour {
 		if (this.carriedSheep == null)
 		{
 			GameObject sheep = SheepMath.FindClosestUnsafeSheep (this.gameObject);
+			if (sheep == null) return null;
 			float distance = SheepMath.DistanceBetween2DGameObjects(this.gameObject, sheep.gameObject);
 			if (distance < maxSheepPickupDistance) {
 				sheep.SetActive (false);
 				carriedSheep = sheep;
 				animator.SetBool ("CarryingSheep", true);
+				AudioSource.PlayClipAtPoint(pickupClip, Vector3.zero);
 				return carriedSheep;
 			}
 		}
@@ -104,6 +108,7 @@ public class HeroController : MonoBehaviour {
 				carriedSheep = null;
 				animator.SetBool ("CarryingSheep", false);
 			}
+			AudioSource.PlayClipAtPoint(dropClip, Vector3.zero);
 		}
 	}
 }
