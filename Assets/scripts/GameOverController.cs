@@ -20,12 +20,12 @@ public class GameOverController : MonoBehaviour {
 	private bool gameOver = false;
 	private bool typedSomething = false;
 	void Awake () {
-		StateController.OnEndGame += ShowGameOver;
+
 	}
 
 	// Use this for initialization
 	void Start () {
-		
+
 	}
 	
 	// Update is called once per frame

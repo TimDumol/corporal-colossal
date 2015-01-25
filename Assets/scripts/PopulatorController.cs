@@ -15,7 +15,7 @@ public class PopulatorController : MonoBehaviour
 
 	void Awake ()
 	{
-		StateController.OnLevelStart += OnLevelStart;
+
 		GameObject tmp = Instantiate (sheep, new Vector3 (-100, -100, -100), Quaternion.identity) as GameObject;
 		sheepSize = tmp.collider.bounds.size;
 		Destroy (tmp);
@@ -76,7 +76,7 @@ public class PopulatorController : MonoBehaviour
 		Instantiate (player, new Vector3 (30, playerSize.y/2, 0), Quaternion.identity);
 	}
 
-	void OnLevelStart (int level)
+	public void OnLevelStart (int level)
 	{
 		SpawnPlayer ();
 		for (int i = 0; i < Mathf.Min (GameProperties.MAX_SHEEP, 2 + level); ++i) {

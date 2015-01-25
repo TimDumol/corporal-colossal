@@ -10,8 +10,6 @@ public class ScoreDisplayController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		StateController.OnLevelStart += ShowScore;
-		StateController.OnScoreChange += ShowScore;
 		ShowScore (0);
 	}
 	
@@ -20,7 +18,7 @@ public class ScoreDisplayController : MonoBehaviour {
 	
 	}
 
-	void ShowScore (int score) {
+	public void ShowScore (int score) {
 		levelCanvas = GameObject.FindGameObjectWithTag("LevelCanvas");
 		if (instance != null) {
 						Destroy (instance);
