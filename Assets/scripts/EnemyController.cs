@@ -60,8 +60,36 @@ public class EnemyController : MonoBehaviour {
 				GameProperties.bottomPadded,
 				GameProperties.leftPadded));
 		}
+//		DrawPath(navAgent.path); for debugging NavMeshPath
 	}
 
+	void DrawPath (NavMeshPath path) {
+		if (path.corners.Length < 2)
+			return;
+		Color c = Color.black;
+		switch(path.status) {
+		case NavMeshPathStatus.PathComplete:
+			c = Color.white;
+			break;
+		case NavMeshPathStatus.PathInvalid:
+			c = Color.red;
+			break;
+		case NavMeshPathStatus.PathPartial:
+			c = Color.yellow;
+			break;
+		}
+		
+		Vector3 previousCorner = path.corners[0];
+		
+		int i = 1;
+		while (i < path.corners.Length) {
+			Vector3 currentCorner = path.corners[i];
+			Debug.DrawLine(previousCorner, currentCorner, c);
+			previousCorner = currentCorner;
+			i++;
+		}
+	}
+	
 	void OnCollisionEnter(Collision collision) {
 		Collider other = collision.collider;
 		if (!animator.GetBool ("loving") && other.gameObject.tag == "Sheep" && !other.gameObject.GetComponent<SheepController>().safe) {
