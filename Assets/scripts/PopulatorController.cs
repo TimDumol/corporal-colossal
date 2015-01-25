@@ -4,6 +4,8 @@ using System.Collections;
 public class PopulatorController : MonoBehaviour
 {
 	public float enemySpawnTimer;
+	public float sheepSpawnPadding;
+	public float enemySpawnPadding = 5;
 	public GameObject sheep;
 	public GameObject enemy;
 	public GameObject player;
@@ -28,7 +30,6 @@ public class PopulatorController : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
-
 		//Debug.Log (string.Format ("my size is : {0}; {1}", sheepSize, sheep.collider.bounds));
 	}
 
@@ -48,8 +49,8 @@ public class PopulatorController : MonoBehaviour
 	{
 		bool spawned = false;
 		do {
-			float z = Random.Range (GameProperties.bottom, GameProperties.top);
-			float x = Random.Range (GameProperties.left, GameProperties.right);
+			float z = Random.Range (GameProperties.bottom + sheepSpawnPadding, GameProperties.top - sheepSpawnPadding);
+			float x = Random.Range (GameProperties.left + sheepSpawnPadding, GameProperties.right - sheepSpawnPadding);
 			if (canPut(sheepSize, x, z)) {
 				Instantiate (sheep, new Vector3 (x, sheepSize.y/2, z), Quaternion.identity);
 				spawned = true;
@@ -63,7 +64,7 @@ public class PopulatorController : MonoBehaviour
 		bool spawned = false;
 		do {
 			float z = Random.Range (GameProperties.bottom, GameProperties.top);
-			float x = Random.Range (GameProperties.left, GameProperties.right);
+			float x = (Random.value > 0.5f ? GameProperties.left + enemySpawnPadding : GameProperties.right - enemySpawnPadding);
 			if (canPut(enemySize, x, z)) {
 				GameObject e = (GameObject)Instantiate (enemy, new Vector3 (x, enemySize.y/2f, z), Quaternion.identity);
 				e.GetComponent<NavMeshAgent>().speed *= 1 + 0.10f*level;
