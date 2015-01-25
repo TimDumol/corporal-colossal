@@ -13,3 +13,5 @@ EditorBuildSettings:
     path: Assets/scenes/InstructionsScene.unity
   - enabled: 1
     path: Assets/scenes/HighscoreScene.unity
+  - enabled: 1
+    path: Assets/scenes/NewspaperIntro.unity
