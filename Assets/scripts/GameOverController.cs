@@ -12,6 +12,10 @@ public class GameOverController : MonoBehaviour {
 	public Button addScoreButton;
 	public Image EndScoreRibbon;
 	public Image NameInputRibbon;
+	public GameObject buttonQuad;
+	private GameObject titleQuadInstance;
+	private GameObject restartQuadInstance;
+	private GameObject addScoreQuadInstance;
 	private Text fieldInstance;
 	private bool gameOver = false;
 	private bool typedSomething = false;
@@ -49,6 +53,15 @@ public class GameOverController : MonoBehaviour {
 					fieldInstance.text.Substring (0, fieldInstance.text.Length - 1);
 				}
 			}
+			if (Input.GetKeyDown("return") || Input.GetKeyDown("enter")) {
+				Restart ();
+			}
+			if (Input.GetKeyDown ("tab")) {
+				GoToTitle();
+			}
+			if (Input.GetKeyDown ("left ctrl")) {
+				GoToHighscore();
+			}
 		}
 	}
 
@@ -67,7 +80,6 @@ public class GameOverController : MonoBehaviour {
 
 		Button instance4 = Instantiate (titleButton) as Button;
 		instance4.transform.SetParent (levelCanvas.transform, false);
-		instance4.onClick.AddListener(() => {GoToTitle();Debug.Log ("SHIT");});
 
 		Image instance5 = Instantiate (EndScoreRibbon) as Image;
 		instance5.transform.SetParent (levelCanvas.transform, false);
@@ -91,11 +103,13 @@ public class GameOverController : MonoBehaviour {
     }
 
 	public static void GoToTitle () {
+		//Destroy (GameObject.Find("StateController"));
 		Application.LoadLevel (0);
     }
 
 	public static void Restart() {
-		Application.LoadLevel (1);
+		//GameObject.Find ("StateController").GetComponent <StateController> ().Init ();
+		Application.LoadLevel (5);
     }
 
 	public  static void GoToHighscore () {

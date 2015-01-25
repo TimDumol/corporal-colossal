@@ -76,12 +76,16 @@ public class StateController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		Init ();
+    }
+
+	public void Init() {
 		StateController.level = 1;
 		PreLevelStart ();
 		ResetLives ();
 		OnLevelStart (StateController.level);
 
-    }
+	}
 
 	public static int CountUnsafeSheep () {
 		int unsafeSheep = 0;

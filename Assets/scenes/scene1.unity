@@ -737,6 +737,7 @@ MonoBehaviour:
   addScoreButton: {fileID: 11463168, guid: 371c88a6411b5f4458b3c7891810f949, type: 2}
   EndScoreRibbon: {fileID: 11481858, guid: 9a4593a923289294598714090081061a, type: 2}
   NameInputRibbon: {fileID: 11475426, guid: 19be209779acfbd44b3889db3a419c9e, type: 2}
+  buttonQuad: {fileID: 0}
 --- !u!1001 &399019633
 Prefab:
   m_ObjectHideFlags: 0

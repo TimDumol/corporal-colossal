@@ -25,7 +25,6 @@ public class PopulatorController : MonoBehaviour
 		tmp = Instantiate (player, new Vector3 (-10000, -10000, -10000), Quaternion.identity) as GameObject;
 		playerSize = tmp.collider.bounds.size;
 		Destroy (tmp);
-		Debug.Log (string.Format ("my sheep size is: {0}; {1}; {2}", sheepSize, enemySize, playerSize));
 	}
 	// Use this for initialization
 	void Start ()
