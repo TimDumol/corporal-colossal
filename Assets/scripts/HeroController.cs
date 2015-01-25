@@ -6,6 +6,7 @@ public class HeroController : MonoBehaviour {
 	public float maxEntranceDistance;
 	public float moveSpeed;
 	public GameObject carriedSheep;
+	private AudioSource walkingSound;
 	// space was pressed before last fixedupdate
 	private bool spaceIsHeld = false;
 	private Animator animator;
@@ -13,6 +14,7 @@ public class HeroController : MonoBehaviour {
 	void Start ()
 	{
 		animator = transform.FindChild ("Player Renderer").GetComponent<Animator>();
+		walkingSound = GetComponent<AudioSource> ();
 	}
 
 	// Update is called once per frame
@@ -25,10 +27,17 @@ public class HeroController : MonoBehaviour {
 		transform.position += movement * Time.deltaTime * moveSpeed;
 		transform.localScale = SheepMath.GetLocalScale(this.gameObject, h);
 
-		if (Mathf.Abs(h) > 0 || Mathf.Abs(v) > 0) {
+		if (Mathf.Abs (h) > 0 || Mathf.Abs (v) > 0) {
 			animator.SetBool ("Walking", true);
+			if (!walkingSound.isPlaying) {
+				walkingSound.Play ();
+			}
+
 		} else {
 			animator.SetBool ("Walking", false);
+			if (walkingSound.isPlaying) {
+				walkingSound.Pause();
+			}
 		}
 		if (spaceIsHeld) {
 			// Do nothing because space was just being held down.
